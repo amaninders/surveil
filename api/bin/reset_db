@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+const { sequelize } = require("../src/models");
+sequelize.sync({ force: true });
