@@ -1,4 +1,6 @@
 # surveil
+![Logo](./client/public/images/cover.png)
+A web app and browser extension to track productivity based on browser network activity.
 
 ## Getting Started
 1. Install dependencies: `npm install`
