@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.send('Index Router');
+router.get("/", (_, res) => {
+  res.send("Index Router");
 });
 
 module.exports = router;
