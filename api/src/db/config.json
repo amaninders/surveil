@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "labber",
+    "password": "labber",
+    "database": "final_project",
+    "host": "0.0.0.0",
+    "port": "5432",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "labber",
+    "password": "labber",
+    "database": "final_project",
+    "host": "0.0.0.0",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "labber",
+    "password": "labber",
+    "database": "final_project",
+    "host": "0.0.0.0",
+    "dialect": "postgres"
+  }
+}
