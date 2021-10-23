@@ -1,8 +1,11 @@
 const createError = require("http-errors");
 const express = require("express");
-const path = require("path");
-const cookieSession = require("cookie-session");
+const cookieParser = require("cookie-parser");
+const jwt = require("express-jwt");
 const logger = require("morgan");
+
+const exceptionHandler = require("./middleware/exceptionHandler");
+const errorHandler = require("./middleware/errorHandler");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -12,29 +15,24 @@ const app = express();
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2']
-}));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser());
+app.use(jwt({
+  secret: process.env.JWT_SECRET,
+  algorithms: ["HS256"],
+  getToken: req => {
+    return req.cookies.token;
+  }
+}).unless({ path: ["/api/users/login/1"] }));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/api/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(_, __, next) {
   next(createError(404));
 });
 
-// error handler
-app.use(function(err, req, res) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
-});
+app.use(exceptionHandler);
+app.use(errorHandler);
 
 module.exports = app;

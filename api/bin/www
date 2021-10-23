@@ -71,8 +71,7 @@ const server = http.createServer(app);
 server.on("error", onError);
 server.on("listening", onListening);
 
-// eslint-disable-next-line space-before-function-paren
-(async () => {
+(async function() {
   // Load models and create any tables that don't already exist
   const { sequelize } = require("../src/models");
   await sequelize.sync();
