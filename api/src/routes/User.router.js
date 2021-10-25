@@ -18,13 +18,14 @@ router.post("/add", async function(req, res) {
     last_name: lastName,
     browser_agent: browserAgent
   } = req.query;
+  /* eslint-disable camelcase */
+
   const newUser = await User.create({
     firstName,
     lastName,
     browserAgent,
     raw: true
   });
-  /* eslint-disable camelcase */
 
   auth.loginAs(newUser.id, req, res);
   res.json(newUser);

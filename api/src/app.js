@@ -7,8 +7,7 @@ const logger = require("morgan");
 const exceptionHandler = require("./middleware/exceptionHandler");
 const errorHandler = require("./middleware/errorHandler");
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+const usersRouter = require("./routes/User.router");
 
 const app = express();
 
@@ -24,7 +23,6 @@ app.use(jwt({
   }
 }).unless({ path: ["/api/users/login/1"] }));
 
-app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
 
 // catch 404 and forward to error handler
