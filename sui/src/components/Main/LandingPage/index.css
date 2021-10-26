@@ -1,0 +1,150 @@
+body {
+  font-family: "Montserrat";
+  text-align: center;
+}
+
+h2,
+h3 {
+  font-weight: bold;
+}
+
+p {
+  color: #afafaf;
+}
+
+.big-heading {
+  font-size: 3rem;
+  line-height: 1.5;
+  font-weight: 900;
+}
+
+.container-fluid {
+  padding: 7% 15%;
+}
+
+/* Sections */
+.colored {
+  background-color: #006864;
+  color: black;
+}
+
+.white {
+  background-color: #fff;
+}
+
+/* Navigation Bar */
+
+.navbar {
+  padding: 0 0 4rem;
+}
+
+.navbar-brand {
+  font-family: "Ubuntu";
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.logo {
+  height: 350px;
+}
+
+.nav-item {
+  padding: 0 18px;
+}
+
+.nav-link {
+  font-family: "Montserrat";
+  font-weight: 100;
+  font-size: 1.5rem;
+}
+
+/* Login Sign Up Buttons */
+
+.login-button {
+  margin: 5% 3% 5% 0;
+}
+
+/* Title */
+
+#title .container-fluid {
+  padding: 3% 15% 7%;
+  text-align: left;
+}
+
+/* Title Image */
+
+.title-image {
+  max-width: 60%;
+}
+
+.image-container {
+  position: relative;
+}
+
+/* Features */
+
+#features {
+  position: relative;
+}
+
+.feature-box {
+  padding: 5%;
+}
+
+.feature-title {
+  font-size: 1.5rem;
+}
+
+.feature-icon {
+  color: #1c7947;
+  margin-bottom: 1rem;
+}
+
+.feature-icon:hover {
+  color: #6d9886;
+}
+
+/* Functionality Section */
+#functionality {
+  padding: 100px;
+}
+
+.functionality-column {
+  padding: 3% 2%;
+}
+
+.functionality-column h1 {
+  padding-top: 110px;
+  color: #006864;
+  font-weight: bold;
+}
+
+.functionality-column h5 {
+  text-align: justify;
+}
+
+.feature-image {
+  height: 100%;
+  width: 100%;
+}
+
+/* Footer Section */
+
+.footer-icon {
+  margin: 2%;
+}
+
+/* Media Query */
+
+@media (max-width: 990px) {
+  .image-container {
+    position: static;
+    width: 100%;
+  }
+
+  #title {
+    text-align: center;
+  }
+}

@@ -1,27 +1,23 @@
-import './App.css';
-import { useState } from 'react';
-import Header from './components/Header';
-import Main from './components/Main/Index';
-import Nav from './components/Nav';
+import "./App.css";
+import { useState } from "react";
+import Header from "./components/Header";
+import Main from "./components/Main/Index";
+import Nav from "./components/Nav";
 
 function App() {
-
-	const [view, setView] = useState('Home')
+  const [view, setView] = useState("Home");
 
   return (
     <div className="App">
-			<Header />
+      <Header />
 
-			<div className="container-fluid">
-			  <div className="row">
-			    <Nav
-						selected={view} 
-						setView={setView}
-					/>
-					<Main view={view}/>
-			  </div>
-			</div>
-		</div>
+      <div className="container-fluid">
+        <div className="row">
+          <Nav selected={view} setView={setView} />
+          <Main view={view} />
+        </div>
+      </div>
+    </div>
   );
 }
 
