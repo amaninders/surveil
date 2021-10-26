@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./CreateUser.css";
-
 function CreateUser(props) {
   //will go back to users table view
   const cancel = () => {

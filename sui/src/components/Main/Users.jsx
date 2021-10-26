@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UsersTableData from "./Users/UsersTableData";
 import UsersTableHeader from "./Users/UsersTableHeader";
 
@@ -109,11 +109,13 @@ export default function Users() {
   const [users, setUsers] = useState(usersArray);
   const [newUser, setNewUser] = useState(false);
 
+  useEffect(() => {});
+
   return (
     <div className="users-container">
       <UsersHeader setNewUser={setNewUser} />
       {!newUser && (
-        <table className="table table-hover">
+        <table className="table table-hover shadow">
           <tr>
             <UsersTableHeader users={users} />
           </tr>

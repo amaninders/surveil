@@ -1,3 +1,10 @@
+import {
+  faTrashAlt,
+  faUser,
+  faUserEdit,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { progressBarColor } from "../../../helpers/progressBarColor";
 
 export default function UsersTableData(props) {
@@ -8,7 +15,11 @@ export default function UsersTableData(props) {
       {users.map((user, index) => (
         <tr key={index} className="shadow p-3 mb-5 bg-white rounded">
           <td>
-            <img src="/images/user.png" alt="user" />
+            <FontAwesomeIcon
+              icon={faUser}
+              size="2x"
+              style={{ color: "grey" }}
+            />
           </td>
           <td>{user.first_name}</td>
           <td>{user.last_name}</td>
@@ -32,18 +43,14 @@ export default function UsersTableData(props) {
             </div>
           </td>
           <td>
-            <img
-              className="rounded-circle"
-              src="/images/edit.jpeg"
-              alt="edit"
+            <FontAwesomeIcon
+              icon={faUserEdit}
+              size="2x"
+              style={{ color: "#6D9886" }}
             />
           </td>
           <td>
-            <img
-              className="rounded-circle"
-              src="/images/delete.jpeg"
-              alt="delete"
-            />
+            <FontAwesomeIcon icon={faTrashAlt} size="2x" />
           </td>
         </tr>
       ))}
