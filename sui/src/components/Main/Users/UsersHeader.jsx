@@ -1,4 +1,5 @@
-import "./UsersHeader.css";
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function UsersHeader(props) {
   const addNewUser = () => {
@@ -7,7 +8,7 @@ export default function UsersHeader(props) {
   return (
     <div className="user-header">
       <h1>{"Organization >> Users"}</h1>
-      <form className="d-flex">
+      <form className="d-flex search-form">
         <input
           className="form-control me-2 search-employees"
           type="search"
@@ -39,7 +40,8 @@ export default function UsersHeader(props) {
         className="btn btn-outline-dark"
         onClick={addNewUser}
       >
-        + New User
+        {" "}
+        <FontAwesomeIcon icon={faUserPlus} />
       </button>
     </div>
   );
