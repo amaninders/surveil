@@ -24,6 +24,11 @@ module.exports = (sequelize, DataTypes) => {
       targetKey: "id",
     });
 
+    User.belongsTo(db.Organization, {
+      foreignKey: "organizationId",
+      targetKey: "id",
+    });
+
     User.belongsTo(db.Team, {
       foreignKey: "teamId",
       targetKey: "id",

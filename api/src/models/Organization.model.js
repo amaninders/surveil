@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     Organization.belongsTo(db.User, {
       foreignKey: 'adminId',
       targetKey: 'id',
+      constraints: false,
     });
   };
 
