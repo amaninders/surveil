@@ -6,7 +6,12 @@ class NotAuthorizedError extends Error {
   status = 400;
 }
 
+class PermissionError extends Error {
+  status = 403;
+}
+
 module.exports = {
   NotFoundError,
   NotAuthorizedError,
+  PermissionError
 };

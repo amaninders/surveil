@@ -7,6 +7,7 @@ const logger = require("morgan");
 const exceptionHandler = require("./middleware/exceptionHandler");
 const errorHandler = require("./middleware/errorHandler");
 
+const activityStreamRouter = require("./routes/ActivityStream.router");
 const usersRouter = require("./routes/User.router");
 const teamsRouter = require("./routes/Team.router");
 
@@ -24,6 +25,7 @@ app.use(jwt({
   }
 }).unless({ path: ["/api/users/login/1"] }));
 
+app.use("/api/activity", activityStreamRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/teams", teamsRouter);
 

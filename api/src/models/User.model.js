@@ -19,11 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       targetKey: "id",
     });
 
-    User.belongsTo(db.ActivityStream, {
-      foreignKey: "activityStreamId",
-      targetKey: "id",
-    });
-
     User.belongsTo(db.Organization, {
       foreignKey: "organizationId",
       targetKey: "id",
