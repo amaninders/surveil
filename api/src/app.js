@@ -8,6 +8,7 @@ const exceptionHandler = require("./middleware/exceptionHandler");
 const errorHandler = require("./middleware/errorHandler");
 
 const usersRouter = require("./routes/User.router");
+const teamsRouter = require("./routes/Team.router");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(jwt({
 }).unless({ path: ["/api/users/login/1"] }));
 
 app.use("/api/users", usersRouter);
+app.use("/api/teams", teamsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(_, __, next) {

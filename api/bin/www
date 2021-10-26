@@ -7,6 +7,8 @@ require("dotenv").config();
  * Module dependencies.
  */
 
+require("express-async-errors");
+
 const app = require("../src/app");
 const debug = require("debug")("api:server");
 const http = require("http");
