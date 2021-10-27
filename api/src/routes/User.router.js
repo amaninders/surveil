@@ -7,7 +7,10 @@ const {
   getOptionsForUsersManagedBy,
   isManagerOf,
 } = require("../helpers/user");
-const { prepareUserForOutput } = require("../helpers/prepareForOutput");
+const {
+  prepareUserForOutput,
+  prepareActivityStreamForOutput,
+} = require("../helpers/prepareForOutput");
 const { User, ActivityStream } = require("../models");
 
 const router = express.Router();
@@ -42,7 +45,7 @@ router.get("/:user_id/activity", withUser, async function(req, res) {
     raw: true,
   });
 
-  res.json(activities);
+  res.json(activities.map(prepareActivityStreamForOutput));
 });
 
 // POST /api/users
@@ -75,11 +78,10 @@ router.post("/", async function(req, res) {
     lastName,
     browserAgent,
     teamId,
-    raw: true
-  });
+  }, { raw: true });
 
   auth.loginAs(newUser.id, req, res);
-  res.json(prepareUserForOutput(newUser));
+  res.json(prepareUserForOutput(newUser.toJSON()));
 });
 
 // Debug routes below

@@ -9,22 +9,58 @@ const renameProperties = (obj, fromToMapping) => {
   return result;
 };
 
-const prepareUserForOutput = user => (renameProperties(user, {
-  "firstName": "first_name",
-  "lastName": "last_name",
-  "browserAgent": "browser_agent",
-  "isManager": "is_manager",
-  "isAdmin": "is_admin",
-  "teamId": "team_id",
-  "activityProfileId": "activity_profile_id",
-}));
+const prepareUserForOutput = user => {
+  if (user.toJSON) {
+    user = user.toJSON();
+  }
+
+  return renameProperties(user, {
+    "firstName": "first_name",
+    "lastName": "last_name",
+    "browserAgent": "browser_agent",
+    "isManager": "is_manager",
+    "isAdmin": "is_admin",
+    "teamId": "team_id",
+    "activityProfileId": "activity_profile_id",
+    "organizationId": "organization_id",
+  });
+};
 
 const prepareOrganizationForOutput = organization => {
+  if (organization.toJSON) {
+    organization = organization.toJSON();
+  }
+
   delete organization.adminId;
   return organization;
+};
+
+const prepareActivityStreamForOutput = activityStream => {
+  if (activityStream.toJSON) {
+    activityStream = activityStream.toJSON();
+  }
+
+  delete activityStream.userId;
+
+  return renameProperties(activityStream, {
+    "startTime": "start_time",
+    "endTime": "end_time",
+  });
+};
+
+const prepareTeamForOutput = team => {
+  if (team.toJSON) {
+    team = team.toJSON();
+  }
+
+  return renameProperties(team, {
+    "managerId": "manager_id",
+  });
 };
 
 module.exports = {
   prepareUserForOutput,
   prepareOrganizationForOutput,
+  prepareActivityStreamForOutput,
+  prepareTeamForOutput,
 };
