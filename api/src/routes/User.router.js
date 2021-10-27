@@ -3,7 +3,10 @@ const express = require("express");
 const { NotFoundError, PermissionError } = require("../errors");
 const withUser = require("../middleware/withUser");
 const auth = require("../helpers/auth");
-const { getOptionsForUsersManagedBy, isManagerOf } = require("../helpers/user");
+const {
+  getOptionsForUsersManagedBy,
+  isManagerOf,
+} = require("../helpers/user");
 const { User, ActivityStream } = require("../models");
 
 const router = express.Router();
@@ -45,13 +48,31 @@ router.post("/", async function(req, res) {
   const {
     first_name: firstName,
     last_name: lastName,
-    browser_agent: browserAgent
+    browser_agent: browserAgent,
+    is_manager: isManager,
+    is_admin: isAdmin,
+    team_id: teamId,
   } = req.body;
+  const otherProperties = {};
+
+  if (isManager === "true" || isAdmin === "true") {
+    const userId = req.user ? req.user.id : null;
+    const myUser = await User.findByPk(userId);
+
+    if (!(myUser && myUser.isAdmin)) {
+      throw new PermissionError();
+    }
+    
+    otherProperties.isManager = isManager === "true";
+    otherProperties.isAdmin = isAdmin === "true";
+  }
 
   const newUser = await User.create({
+    ...otherProperties,
     firstName,
     lastName,
     browserAgent,
+    teamId,
     raw: true
   });
 
