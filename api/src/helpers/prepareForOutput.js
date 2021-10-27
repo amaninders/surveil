@@ -19,6 +19,12 @@ const prepareUserForOutput = user => (renameProperties(user, {
   "activityProfileId": "activity_profile_id",
 }));
 
+const prepareOrganizationForOutput = organization => {
+  delete organization.adminId;
+  return organization;
+};
+
 module.exports = {
   prepareUserForOutput,
+  prepareOrganizationForOutput,
 };
