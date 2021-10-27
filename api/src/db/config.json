@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "development",
-    "password": "development",
+    "username": "labber",
+    "password": "labber",
     "database": "final_project",
     "host": "0.0.0.0",
     "port": "5432",
@@ -11,8 +11,8 @@
     }
   },
   "test": {
-    "username": "development",
-    "password": "development",
+    "username": "labber",
+    "password": "labber",
     "database": "final_project",
     "host": "0.0.0.0",
     "dialect": "postgres",
@@ -21,8 +21,8 @@
     }
   },
   "production": {
-    "username": "development",
-    "password": "development",
+    "username": "labber",
+    "password": "labber",
     "database": "final_project",
     "host": "0.0.0.0",
     "dialect": "postgres",
