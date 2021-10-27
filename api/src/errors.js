@@ -8,6 +8,7 @@ class NotAuthorizedError extends Error {
 
 class PermissionError extends Error {
   status = 403;
+  message = "Insufficient Permissions.";
 }
 
 module.exports = {

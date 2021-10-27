@@ -12,6 +12,7 @@ const activityProfileRouter = require("./routes/ActivityProfile.router");
 const activityStreamRouter = require("./routes/ActivityStream.router");
 const usersRouter = require("./routes/User.router");
 const teamsRouter = require("./routes/Team.router");
+const organizationRouter = require("./routes/Organization.router");
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use(
   })
 );
 
+app.use("/api/organization", organizationRouter);
 app.use("/api/activity_profile", activityProfileRouter);
 app.use("/api/activity", activityStreamRouter);
 app.use("/api/users", usersRouter);
