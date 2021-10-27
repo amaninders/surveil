@@ -23,10 +23,11 @@ app.use(cookieParser());
 app.use(jwt({
   secret: process.env.JWT_SECRET,
   algorithms: ["HS256"],
+  credentialsRequired: false,
   getToken: req => {
     return req.cookies.token;
   }
-}).unless({ path: ["/api/users/login/1"] }));
+}));
 
 app.use("/api/activity_profile", activityProfileRouter);
 app.use("/api/activity", activityStreamRouter);
