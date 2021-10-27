@@ -7,6 +7,7 @@ const {
   getOptionsForUsersManagedBy,
   isManagerOf,
 } = require("../helpers/user");
+const { prepareUserForOutput } = require("../helpers/prepareForOutput");
 const { User, ActivityStream } = require("../models");
 
 const router = express.Router();
@@ -21,9 +22,10 @@ router.get("/", withUser, async function(req, res) {
     attributes: {
       exclude: [ "organizationId", "isAdmin", "isManager" ],
     },
+    raw: true,
   });
 
-  res.json(users);
+  res.json(users.map(prepareUserForOutput));
 });
 
 // GET /api/users/:user_id/activity
@@ -77,7 +79,7 @@ router.post("/", async function(req, res) {
   });
 
   auth.loginAs(newUser.id, req, res);
-  res.json(newUser);
+  res.json(prepareUserForOutput(newUser));
 });
 
 // Debug routes below

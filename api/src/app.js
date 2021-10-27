@@ -16,7 +16,14 @@ const teamsRouter = require("./routes/Team.router");
 const app = express();
 
 app.use(logger("dev"));
-app.use(cors());
+app.use(cors({
+  origin: [
+    `http://localhost:${process.env.PORT}`,
+    `http://localhost:3000`,
+    `http://localhost:3002`,
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -33,7 +40,6 @@ app.use(
 );
 
 app.use("/api/activity_profile", activityProfileRouter);
-
 app.use("/api/activity", activityStreamRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/teams", teamsRouter);
