@@ -13,15 +13,16 @@ export default function Users() {
   const [users, setUsers] = useState([]);
   const [view, setView] = useState("Users");
 
+  const loadUsers = async () => {
+    const usersResult = await axios.get("http://localhost:8000/api/users", { withCredentials: true });
+    console.log(usersResult.data);
+    setUsers(usersResult.data);
+  };
+
   //get all users
   useEffect(() => {
     loadUsers();
   }, []);
-
-  const loadUsers = async () => {
-    const usersResult = await axios.get("http://localhost:8000/api/users", {withCredentials: true});
-    setUsers(usersResult.data);
-  };
 
   return (
     <div className="users-container">
