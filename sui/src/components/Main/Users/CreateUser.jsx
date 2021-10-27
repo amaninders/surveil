@@ -1,18 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function CreateUser(props) {
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
-    team: "",
-    isManager: false,
+    team_id: null,
+    is_manager: false,
     activityProfile: "",
   });
+  const [teams, setTeams] = useState([]);
 
   //will go back to users table view
   const cancel = () => {
     props.setView("Users");
+  };
+
+  useEffect(() => {
+    loadTeams();
+  }, []);
+
+  const loadTeams = async () => {
+    const allTeams = await axios.get("http://localhost:8000/api/teams", {
+      withCredentials: true,
+    });
+    console.log(allTeams.data);
+    setTeams(allTeams.data);
   };
 
   //add new user
@@ -25,6 +38,10 @@ function CreateUser(props) {
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleCheck = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.checked });
   };
 
   return (
@@ -56,14 +73,16 @@ function CreateUser(props) {
           <label className="form-label">Team</label>
           <select
             className="form-select"
-            name="team"
-            value={user.team}
+            name="team_id"
+            value={user.team_id}
             onChange={onInputChange}
           >
             <option selected>Select Team</option>
-            <option>Finance</option>
-            <option>Sales</option>
-            <option>Support</option>
+            {teams.map((team) => (
+              <option key={team.id} value={team.id}>
+                {team.name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="col-md-6">
@@ -82,7 +101,14 @@ function CreateUser(props) {
         </div>
         <div>
           <div className="form-check">
-            <input className="form-check-input" type="checkbox" />
+            <input
+              className="form-check-input"
+              type="checkbox"
+              name="is_manager"
+              value={user.is_manager}
+              defaultChecked={false}
+              onChange={handleCheck}
+            />
             <label className="form-check-label">Manager</label>
           </div>
         </div>
