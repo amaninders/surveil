@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function UsersHeader(props) {
   const addNewUser = () => {
-    props.setView("addUser");
+    props.setNewUser(true);
   };
   return (
     <div className="user-header">
-      <h1>{"All Users"}</h1>
+      <h1>{"Organization >> Users"}</h1>
       <form className="d-flex search-form">
         <input
           className="form-control me-2 search-employees"

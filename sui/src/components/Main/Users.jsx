@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-
 import UsersTableData from "./Users/UsersTableData";
-import UsersHeader from "./Users/UsersHeader";
-import CreateUser from "./Users/CreateUser";
+import UsersTableHeader from "./Users/UsersTableHeader";
 
 import "./Users.css";
+import UsersHeader from "./Users/UsersHeader";
+import CreateUser from "./Users/CreateUser";
 
 export default function Users() {
   const usersArray = [
@@ -107,26 +106,25 @@ export default function Users() {
     },
   ];
 
-  const [users, setUsers] = useState([]);
-  const [view, setView] = useState("Users");
+  const [users, setUsers] = useState(usersArray);
+  const [newUser, setNewUser] = useState(false);
 
-  //get all users
-  // useEffect(() => {
-  //   loadUsers();
-  // }, []);
-
-  // const loadUsers = async () => {
-  //   const usersResult = await axios.get("http://localhost:8000/users");
-  //   setUsers(usersResult.data);
-  // };
+  useEffect(() => {});
 
   return (
     <div className="users-container">
-      <UsersHeader setView={setView} />
-      {view === "Users" && <UsersTableData users={users} />}
-      {view === "addUser" && (
-        <CreateUser setView={setView} setUsers={setUsers} users={users} />
+      <UsersHeader setNewUser={setNewUser} />
+      {!newUser && (
+        <table className="table table-hover shadow">
+          <tr>
+            <UsersTableHeader users={users} />
+          </tr>
+          <tbody>
+            <UsersTableData users={users} />
+          </tbody>
+        </table>
       )}
+      {newUser && <CreateUser setNewUser={setNewUser} />}
     </div>
   );
 }
