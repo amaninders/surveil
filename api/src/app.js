@@ -39,7 +39,7 @@ app.use("/api/users", usersRouter);
 app.use("/api/teams", teamsRouter);
 
 // catch 404 and forward to error handler
-app.use(function (_, __, next) {
+app.use(function(_, __, next) {
   next(createError(404));
 });
 
