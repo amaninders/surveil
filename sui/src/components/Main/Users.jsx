@@ -6,6 +6,7 @@ import UsersHeader from "./Users/UsersHeader";
 import CreateUser from "./Users/CreateUser";
 
 import "./Users.css";
+import UsersNavbar from "./Users/UsersNavbar";
 
 export default function Users() {
   const usersArray = [
@@ -123,6 +124,7 @@ export default function Users() {
   return (
     <div className="users-container">
       <UsersHeader setView={setView} />
+      <UsersNavbar />
       {view === "Users" && <UsersTableData users={users} />}
       {view === "addUser" && (
         <CreateUser setView={setView} setUsers={setUsers} users={users} />
