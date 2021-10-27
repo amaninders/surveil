@@ -1,12 +1,12 @@
 const { NotFoundError } = require("../errors");
 const { User } = require("../models");
 
-module.exports = async function(req, res, next) {
-  const userId = req.user.id;
+module.exports = async function(req, _, next) {
+  const userId = req.user ? req.user.id : null;
   const myUser = await User.findByPk(userId);
 
   if (!myUser) {
-    throw new NotFoundError(`Could not find user with id ${userId}`);
+    throw new NotFoundError(`Invalid token.`);
   }
 
   req.myUser = myUser;
