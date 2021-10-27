@@ -3,6 +3,7 @@ import {
   faUser,
   faUserEdit,
 } from "@fortawesome/free-solid-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { progressBarColor } from "../../../helpers/progressBarColor";

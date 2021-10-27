@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Users from "../Users";
 
 function CreateUser(props) {
   const [user, setUser] = useState({
