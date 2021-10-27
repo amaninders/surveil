@@ -19,7 +19,7 @@ export default function Users() {
   }, []);
 
   const loadUsers = async () => {
-    const usersResult = await axios.get("http://localhost:8000/api/users", {withCredentials: false});
+    const usersResult = await axios.get("http://localhost:8000/api/users", {withCredentials: true});
     setUsers(usersResult.data);
   };
 
