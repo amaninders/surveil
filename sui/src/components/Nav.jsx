@@ -7,6 +7,7 @@ function Nav(props) {
     { name: "Home", feather: "home" },
     { name: "Teams", feather: "file" },
     { name: "Users", feather: "users" },
+    {name:"Activity Profile", feather:"activity_profile"}
   ];
 
   // function to set view in the parent
