@@ -1,6 +1,5 @@
 import React from 'react'
-import TopSites from '../Stats/General/TopSites'
-import TeamCard from '../Stats/Teams/TeamCard'
+import TeamStats from '../Stats/Teams/TeamStats'
 import TeamSelectors from './TeamSelectors'
 
 function Teams() {
@@ -13,8 +12,7 @@ function Teams() {
 			</div>
 			<div className="container">
 			  <div className="row data--item">
-						<TeamCard />
-						<TopSites />
+					<TeamStats />
 			  </div>
 			  <div className="row">
 			      <div className="col-xs-12"></div>
