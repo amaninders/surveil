@@ -24,7 +24,7 @@ export default function Users() {
   useEffect(() => {
     loadUsers();
     loadTeams();
-  }, []);
+  }, [users]);
 
   //get all teams
   const loadTeams = async () => {
