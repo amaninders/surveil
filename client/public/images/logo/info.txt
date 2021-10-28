@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: kelson_rg
+font link: http://www.fontfabric.com/kelson-sans/
+font author: Bruno Mello
+font author site: http://www.myfonts.com/person/Bruno_Mello/
+
+
+icon designer: andriwidodo
+icon designer link: /andriwidodo21
+        
+{"bg":"#00acff","icon":"#010033","font":"#ffffff","slogan":"#ffffff"}
+      
