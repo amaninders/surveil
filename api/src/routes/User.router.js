@@ -62,13 +62,13 @@ router.post("/", withUser, async function(req, res) {
   const organizationId = myUser.organizationId;
   const otherProperties = {};
 
-  if (isManager === "true" || isAdmin === "true") {
+  if (isManager || isAdmin) {
     if (!(myUser && myUser.isAdmin)) {
       throw new PermissionError();
     }
     
-    otherProperties.isManager = isManager === "true";
-    otherProperties.isAdmin = isAdmin === "true";
+    otherProperties.isManager = isManager;
+    otherProperties.isAdmin = isAdmin;
   }
 
   const newUser = await User.create({
