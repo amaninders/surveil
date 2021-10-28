@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./Home";
 import Teams from "./Teams";
 import Users from "./Users";
+import ActivityProfile from "./ActivityProfile";
 
 function Main(props) {
   return (
@@ -9,6 +10,7 @@ function Main(props) {
       {props.view === "Home" && <Home />}
       {props.view === "Teams" && <Teams />}
       {props.view === "Users" && <Users />}
+      {props.view === "Activity Profile" && <ActivityProfile />}
     </main>
   );
 }

@@ -1,22 +1,39 @@
 .users-container {
   margin: 50px;
-  background-color: rgb(82, 131, 131);
+  background-color: #E8FFFF;
   padding: 60px;
 }
 
 .table-hover tbody tr:hover td {
-  background-color: #e0ffff;
+  background-color: #E8FFFF;
 }
 
 .table {
   margin: 80px auto auto;
   width: 100%;
+  font-size: large;
 }
 
-.navbar-brand{
+.navbar-brand {
   background-color: transparent;
   box-shadow: none;
 }
 
+.navbar {
+  background-color: #41AEA9;
+  font-weight: bolder;
+  font-size:large;
+}
 
+.create-user {
+  padding: 50px;
+}
 
+.search-form{
+  padding: 12px 0px;
+  width: 450px;
+}
+
+.sort-users{
+  padding: 25px 0;
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 function CreateUser(props) {
@@ -6,32 +6,18 @@ function CreateUser(props) {
     first_name: "",
     last_name: "",
     team_id: null,
-    is_manager: false,
-    activityProfile: "",
+    is_manager: true,
+    activityProfile: null,
   });
-  const [teams, setTeams] = useState([]);
 
   //will go back to users table view
   const cancel = () => {
     props.setView("Users");
   };
 
-  useEffect(() => {
-    loadTeams();
-  }, []);
-
-  const loadTeams = async () => {
-    const allTeams = await axios.get("http://localhost:8000/api/teams", {
-      withCredentials: true,
-    });
-    console.log(allTeams.data);
-    setTeams(allTeams.data);
-  };
-
   //add new user
   const addNewUser = (event) => {
     event.preventDefault();
-    console.log(user);
     axios.post("http://localhost:8000/api/users", user);
     props.setView("Users");
   };
@@ -46,7 +32,7 @@ function CreateUser(props) {
 
   return (
     <div>
-      <form className="row g-3" onSubmit={addNewUser}>
+      <form className="row g-3 create-user" onSubmit={addNewUser}>
         <div className="col-md-6">
           <label className="form-label">First Name</label>
           <input
@@ -78,7 +64,7 @@ function CreateUser(props) {
             onChange={onInputChange}
           >
             <option selected>Select Team</option>
-            {teams.map((team) => (
+            {props.teams.map((team) => (
               <option key={team.id} value={team.id}>
                 {team.name}
               </option>

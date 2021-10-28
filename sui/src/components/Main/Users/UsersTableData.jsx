@@ -1,15 +1,31 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { progressBarColor } from "../../../helpers/progressBarColor";
+
 import {
   faTrashAlt,
   faUser,
   faUserEdit,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { progressBarColor } from "../../../helpers/progressBarColor";
-
 export default function UsersTableData(props) {
   const { users } = props;
+
+  const displayTeamName = (id) => {
+    for (let i = 0; i < props.teams.length; i++) {
+      if (props.teams[i].id === id) return props.teams[i].name;
+    }
+  };
+
+  const displayManagerName = (teamId) => {
+    let managerId;
+    for (let i = 0; i < props.teams.length; i++) {
+      if (props.teams[i].id === teamId) managerId = props.teams[i].managerId;
+    }
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].id === managerId)
+        return `${users[i].first_name} ${users[i].last_name}`;
+    }
+  };
 
   return (
     <>
@@ -38,8 +54,8 @@ export default function UsersTableData(props) {
               <td>
                 {user.first_name} {user.last_name}
               </td>
-              <td>{user.team}</td>
-              <td>{user.manager}</td>
+              <td>{displayTeamName(user.team_id)}</td>
+              <td>{displayManagerName(user.team_id)}</td>
               <td>
                 <div className="progress" style={{ height: "15px" }}>
                   <div

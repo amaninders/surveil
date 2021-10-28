@@ -8,7 +8,7 @@ export default function UsersNavbar(props) {
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">
             All Users
@@ -26,47 +26,35 @@ export default function UsersNavbar(props) {
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-              <form class="d-flex">
+              <form class="d-flex search-form">
                 <input
-                  class="form-control me-4"
+                  class="form-control me-4 search-bar"
                   type="search"
                   placeholder="Search Users"
                   aria-label="Search"
                 />
-                <button class="btn btn-outline-success" type="submit">
+                <button class="btn btn-success" type="submit">
                   Search
                 </button>
               </form>
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown ms-5">
                 <a
-                  class="nav-link dropdown-toggle"
+                  class="nav-link dropdown-toggle sort-users"
                   href="/"
                   id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Dropdown
+                  Sort Users
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a class="dropdown-item" href="/">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="/">
-                      Another action
-                    </a>
-                  </li>
+                  <li class="dropdown-item">Name (A-Z)</li>
                   <li>
                     <hr class="dropdown-divider" />
                   </li>
-                  <li>
-                    <a class="dropdown-item" href="/">
-                      Something else here
-                    </a>
-                  </li>
+                  <li class="dropdown-item">High to Low Productivity</li>
+                  <li class="dropdown-item">Low to High Productivity</li>
                 </ul>
               </li>
             </ul>
