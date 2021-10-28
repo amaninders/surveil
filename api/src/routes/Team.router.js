@@ -1,5 +1,9 @@
 const express = require("express");
 const { NotFoundError } = require("../errors");
+const {
+  prepareUserForOutput,
+  prepareTeamForOutput,
+} = require("../helpers/prepareForOutput");
 const { User, Team } = require("../models");
 
 const router = express.Router();
@@ -9,10 +13,9 @@ router.get("/", async function(req, res) {
   const userId = req.user.id;
   const teams = await Team.findAll({
     where: { managerId: userId },
-    attributes: { exclude: [ "managerId" ] },
   });
 
-  res.json(teams);
+  res.json(teams.map(prepareTeamForOutput));
 });
 
 // GET /api/teams/:team_id
@@ -21,14 +24,13 @@ router.get("/:team_id", async function(req, res) {
   const teamId = req.params.team_id;
 
   // Query for the desired team but make sure they have permissions to access it
-  const team = await Team.findOne({
+  let team = await Team.findOne({
     where: {
       id: teamId,
       // A manager should only be able to see their own teams
       managerId: userId,
     },
     raw: true,
-    attributes: { exclude: [ "managerId" ] },
   });
   if (!team) {
     throw new NotFoundError(`Could not find team with id ${teamId}!`);
@@ -41,9 +43,11 @@ router.get("/:team_id", async function(req, res) {
     attributes: { exclude: [ "teamId", "isAdmin", "isManager" ] },
   });
 
+  team = prepareTeamForOutput(team);
+
   res.json({
     ...team,
-    members
+    members: members.map(prepareUserForOutput)
   });
 });
 
@@ -62,7 +66,7 @@ router.post("/", async function(req, res) {
     raw: true
   });
 
-  res.json(newTeam);
+  res.json(prepareTeamForOutput(newTeam));
 });
 
 
