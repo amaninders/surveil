@@ -13,18 +13,21 @@ const activityStreamRouter = require("./routes/ActivityStream.router");
 const usersRouter = require("./routes/User.router");
 const teamsRouter = require("./routes/Team.router");
 const organizationRouter = require("./routes/Organization.router");
+const allSitesRouter = require("./routes/AllSites.router");
 
 const app = express();
 
 app.use(logger("dev"));
-app.use(cors({
-  origin: [
-    `http://localhost:${process.env.PORT}`,
-    `http://localhost:3000`,
-    `http://localhost:3002`,
-  ],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: [
+      `http://localhost:${process.env.PORT}`,
+      `http://localhost:3000`,
+      `http://localhost:3002`,
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -45,6 +48,7 @@ app.use("/api/activity_profile", activityProfileRouter);
 app.use("/api/activity", activityStreamRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/teams", teamsRouter);
+app.use("/api/allsites", allSitesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(_, __, next) {
