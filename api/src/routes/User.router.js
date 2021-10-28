@@ -49,7 +49,7 @@ router.get("/:user_id/activity", withUser, async function(req, res) {
 });
 
 // POST /api/users
-router.post("/", async function(req, res) {
+router.post("/", withUser, async function(req, res) {
   const {
     first_name: firstName,
     last_name: lastName,
@@ -58,12 +58,11 @@ router.post("/", async function(req, res) {
     is_admin: isAdmin,
     team_id: teamId,
   } = req.body;
+  const myUser = req.myUser;
+  const organizationId = myUser.organizationId;
   const otherProperties = {};
 
   if (isManager === "true" || isAdmin === "true") {
-    const userId = req.user ? req.user.id : null;
-    const myUser = await User.findByPk(userId);
-
     if (!(myUser && myUser.isAdmin)) {
       throw new PermissionError();
     }
@@ -74,13 +73,13 @@ router.post("/", async function(req, res) {
 
   const newUser = await User.create({
     ...otherProperties,
+    organizationId,
     firstName,
     lastName,
     browserAgent,
     teamId,
   }, { raw: true });
 
-  auth.loginAs(newUser.id, req, res);
   res.json(prepareUserForOutput(newUser.toJSON()));
 });
 

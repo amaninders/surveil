@@ -1,4 +1,5 @@
 const express = require("express");
+const withUser = require("../middleware/withUser");
 const { NotFoundError } = require("../errors");
 const {
   prepareUserForOutput,
@@ -9,10 +10,16 @@ const { User, Team } = require("../models");
 const router = express.Router();
 
 // GET /api/teams
-router.get("/", async function(req, res) {
-  const userId = req.user.id;
+router.get("/", withUser, async function(req, res) {
+  const myUser = req.myUser;
+  const whereClauses = {};
+  
+  if (!req.myUser.isAdmin) {
+    whereClauses.managerId = myUser.id;
+  }
+
   const teams = await Team.findAll({
-    where: { managerId: userId },
+    where: whereClauses,
   });
 
   res.json(teams.map(prepareTeamForOutput));
