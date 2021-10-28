@@ -4,6 +4,9 @@ function TeamCard() {
 	return (
 		<div className="col-sm-4">
 			<div className="card text-center">
+				<div class="card-header">
+			    Team
+			  </div>
 			  <div className="card-body">
 					
 					<p className="card-text">Select your team</p>				

@@ -1,3 +1,10 @@
+/*
+/
+/ renders the main header for the app
+/ => add login and auth check
+/
+*/
+
 import React from 'react'
 
 
