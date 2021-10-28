@@ -1,30 +1,63 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import ReactEcharts from "echarts-for-react";
 
 function TimeShare() {
-	return (
-		<div className="col-md-4 data--item">
-			<h3>Time Share %</h3>
-			<div className="card">
-				<div className="card-body">
-					<div className="progress">
-						<div className="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-					</div><br/>
-					<div className="progress">
-						<div className="progress-bar" role="progressbar" style={{width:'25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-					</div><br/>
-					<div className="progress">
-						<div className="progress-bar" role="progressbar" style={{width:'25%'}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-					</div><br/>
-					<div className="progress">
-						<div className="progress-bar" role="progressbar" style={{width:'25%'}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-					</div><br/>
-					<div className="progress">
-						<div className="progress-bar" role="progressbar" style={{width:'25%'}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-					</div><br/>
-				</div>
-			</div>
-		</div>
-	)
+  const [allSites, setAllSites] = useState([]);
+
+  useEffect(() => {
+    loadAllSites();
+  }, []);
+
+  //get all sites visited by users and time spent
+  const loadAllSites = async () => {
+    const allSites = await axios.get("http://localhost:8000/api/allsites", {
+      withCredentials: true,
+    });
+    setAllSites(allSites.data);
+  };
+
+  const dataNames = allSites.map((site) => site.name);
+
+  const getOption = () => ({
+    title: {
+      text: "Time Share",
+      x: "center",
+    },
+    tooltip: {
+      trigger: "item",
+      formatter: "{a} <br/>{b}: ({d}%)",
+    },
+    legend: {
+      orient: "vertical",
+      left: "left",
+      data: dataNames,
+    },
+    series: [
+      {
+        name: "Time Share",
+        type: "pie",
+        radius: "55%",
+        center: ["50%", "60%"],
+        data: allSites,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
+      },
+    ],
+  });
+
+  return (
+    <div className="col-md-4 data--item">
+      <div className="card">
+        <ReactEcharts option={getOption()} style={{ height: 300 }} />
+      </div>
+    </div>
+  );
 }
 
-export default TimeShare
+export default TimeShare;
