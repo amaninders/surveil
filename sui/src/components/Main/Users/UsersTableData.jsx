@@ -19,7 +19,7 @@ export default function UsersTableData(props) {
   const displayManagerName = (teamId) => {
     let managerId;
     for (let i = 0; i < props.teams.length; i++) {
-      if (props.teams[i].id === teamId) managerId = props.teams[i].managerId;
+      if (props.teams[i].id === teamId) managerId = props.teams[i].manager_id;
     }
     for (let i = 0; i < users.length; i++) {
       if (users[i].id === managerId)

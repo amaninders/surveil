@@ -6,7 +6,7 @@ function CreateUser(props) {
     first_name: "",
     last_name: "",
     team_id: null,
-    is_manager: true,
+    is_manager: false,
     activityProfile: null,
   });
 
