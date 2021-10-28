@@ -18,7 +18,9 @@ function CreateUser(props) {
   //add new user
   const addNewUser = (event) => {
     event.preventDefault();
-    axios.post("http://localhost:8000/api/users", user);
+    axios.post("http://localhost:8000/api/users", user, {
+      withCredentials: true,
+    });
     props.setView("Users");
   };
 

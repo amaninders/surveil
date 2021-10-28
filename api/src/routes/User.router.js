@@ -67,8 +67,10 @@ router.post("/", withUser, async function(req, res) {
       throw new PermissionError();
     }
     
+    /* eslint-disable eqeqeq */
     otherProperties.isManager = isManager;
     otherProperties.isAdmin = isAdmin;
+    /* eslint-enable eqeqeq */
   }
 
   const newUser = await User.create({
