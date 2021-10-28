@@ -12,7 +12,7 @@
 
 import './App.css';
 import Header from './components/Header';
-import Main from './components/Main/Index';
+// import Main from './components/Main/Index';
 import Navigator from './components/Navigator';
 import Teams from './components/Teams/Index';
 import Users from './components/Users/Index';
@@ -24,8 +24,8 @@ function App() {
 			<main className="container py-5">
 				<Navigator />
 				<hr class="my-5" />
-				<Main />
-				<hr class="my-5" />
+				{/* <Main /> */}
+				{/* <hr class="my-5" /> */}
 				<Teams />
 				<Users />
 			</main>

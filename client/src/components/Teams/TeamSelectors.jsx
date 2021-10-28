@@ -13,7 +13,7 @@ function TeamSelectors() {
 			  </select>
 			</div>
 			<div className="col-12">
-				<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+				<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style={{width:'100%'}}>
 				  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked />
 				  <label class="btn btn-outline-dark" for="btnradio1">Today</label>
 
@@ -26,7 +26,7 @@ function TeamSelectors() {
 			</div>
 
 			
-			<div className="col-12">
+			<div className="col-12" style={{textAlign:'Center'}}>
 			  <button type="submit" className="btn btn-dark">Submit</button>
 			</div>
 		</form>
