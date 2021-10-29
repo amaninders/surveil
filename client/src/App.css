@@ -26,8 +26,13 @@ body {
 	font-size: 1.2rem;
 }
 
+.navigation--active {
+	background-color: rgb(222, 240, 217) !important;
+	border: 3px solid rgb(169, 212, 157);
+}
+
 .navigation--items:hover {
-	background-color: #95d18a;
+	border: 3px solid rgb(169, 212, 157);
 }
 
 .row--item {
