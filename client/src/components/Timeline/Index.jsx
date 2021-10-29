@@ -18,12 +18,17 @@ function Timeline(props) {
     setActivities(allActivities.data);
   };
 
+  const formatTime = (isoDate) =>{
+    const time = new Date(isoDate);
+    return time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+  }
+
   return (
     <div className="container">
       <div className="row data--item">
         <div className="col-md-10">
           <ul className="timeline">
-            {activities.map(activity => <TimelineItem time={`${activity.start_time}`}
+            {activities.map(activity => <TimelineItem time={`${formatTime(activity.start_time)}`}
               appImage="favicon.ico"
               name={activity.name}
               title={activity.title} />)}
