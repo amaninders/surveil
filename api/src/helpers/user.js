@@ -22,7 +22,7 @@ const getOptionsForUsersManagedBy = user => {
 };
 
 const isManagerOf = async function(manager, other) {
-  if (manager.id === other.id) {
+  if (manager.isAdmin || manager.id === other.id) {
     return true;
   }
 
