@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import ItemSelector from '../ItemSelector'
-import TeamStats from '../Stats/Teams/TeamStats'
-import TeamTimeBySite from '../Stats/Teams/TeamTimeBySite'
-import TeamUserList from '../Stats/Teams/TeamUserList'
+import React, { useEffect, useState } from "react";
+import ItemSelector from "../ItemSelector";
+import TeamStats from "../Stats/Teams/TeamStats";
+import TeamTimeBySite from "../Stats/Teams/TeamTimeBySite";
+import TeamUserList from "../Stats/Teams/TeamUserList";
 import axios from "axios";
 
-
 function Teams(props) {
-	props.setView("teams");
+  props.setView("teams");
 
-	const [teams, setTeams] = useState([]);
+  const [teams, setTeams] = useState([]);
 
   useEffect(() => {
     loadTeams();
@@ -22,32 +21,37 @@ function Teams(props) {
     });
     setTeams(allTeams.data);
   };
-	
-	return (
-		<>
-			<div className="container">
-				<div className="row data--item">
-					<ItemSelector item={teams} view={props.view} Id={props.Id} setId={props.setId}/>
-			  </div>
-			</div>
-			<div className="container">
-			  <div className="row data--item">
-					<TeamStats />
-			  </div>
-			  <div className="row data--item">
-			      <div className="col-xs-12">
-							<TeamTimeBySite />
-						</div>
-			  </div>
-				<div className="row data--item">
-			      <div className="col-xs-12">
-							<h3>All Users</h3>
-							<TeamUserList/ >
-						</div>
-			  </div>
-			</div>
-		</>
-	)
+
+  return (
+    <>
+      <div className="container">
+        <div className="row data--item">
+          <ItemSelector
+            item={teams}
+            view={props.view}
+            Id={props.Id}
+            setId={props.setId}
+          />
+        </div>
+      </div>
+      <div className="container">
+        <div className="row data--item">
+          <TeamStats Id={props.Id} />
+        </div>
+        <div className="row data--item">
+          <div className="col-xs-12">
+            <TeamTimeBySite />
+          </div>
+        </div>
+        <div className="row data--item">
+          <div className="col-xs-12">
+            <h3>All Users</h3>
+            <TeamUserList />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default Teams
+export default Teams;
