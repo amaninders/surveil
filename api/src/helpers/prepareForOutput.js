@@ -47,6 +47,17 @@ const prepareActivityStreamForOutput = activityStream => {
   });
 };
 
+const prepareActivityProfileItemForOutput = activityProfileItem => {
+  if (activityProfileItem.toJSON) {
+    activityProfileItem = activityProfileItem.toJSON();
+  }
+
+  return renameProperties(activityProfileItem, {
+    "expectedTime": "expected_time",
+    "activityProfile": "activity_profile_id",
+  });
+};
+
 const prepareTeamForOutput = team => {
   if (team.toJSON) {
     team = team.toJSON();
@@ -61,5 +72,6 @@ module.exports = {
   prepareUserForOutput,
   prepareOrganizationForOutput,
   prepareActivityStreamForOutput,
+  prepareActivityProfileItemForOutput,
   prepareTeamForOutput,
 };
