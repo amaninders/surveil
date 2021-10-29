@@ -54,7 +54,7 @@ const prepareActivityProfileItemForOutput = activityProfileItem => {
 
   return renameProperties(activityProfileItem, {
     "expectedTime": "expected_time",
-    "activityProfile": "activity_profile_id",
+    "activityProfileId": "activity_profile_id",
   });
 };
 

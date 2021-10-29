@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   
   ActivityProfileItem.associate = db => {
     ActivityProfileItem.belongsTo(db.ActivityProfile, {
-      foreignKey: "activityProfile",
+      foreignKey: "activityProfileId",
       targetKey: "id"
     });
   };

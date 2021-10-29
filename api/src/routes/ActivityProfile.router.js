@@ -53,7 +53,7 @@ router.get("/:profile_id", withUser, async function(req, res) {
   }
 
   const activityItems = await ActivityProfileItem.findAll({
-    where: { activityProfile: activityProfileId }
+    where: { activityProfileId }
   }, { raw: true });
 
   res.json({
@@ -83,7 +83,7 @@ router.post("/:profile_id", withUser, async function(req, res) {
   const newActivityProfileItem = await ActivityProfileItem.create({
     name,
     expectedTime,
-    activityProfile: activityProfileId,
+    activityProfileId,
     raw: true,
   });
 
