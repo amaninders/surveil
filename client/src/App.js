@@ -19,8 +19,14 @@ import Users from './components/Users/Index';
 // import Landing from './components/Landing';
 
 import { BrowserRouter as Router,  Switch,  Route } from "react-router-dom";
+import { useState } from 'react';
 
 function App() {
+
+	const [view, setView] = useState();
+	const [Id, setId] = useState({
+    id: null,
+  });
 
 	const menu = [
 		{	name:'home', to: '/main'},
@@ -41,10 +47,10 @@ function App() {
             renders the first one that matches the current URL. */}
 	        <Switch>
 	          <Route path="/Teams">
-	            <Teams />
+	            <Teams view={view} setView={setView} Id={Id} setId={setId}/>
 	          </Route>
 	          <Route path="/users">
-	            <Users />
+	            <Users view={view} setView={setView} Id={Id} setId={setId}/>
 	          </Route>
 	          <Route path="/main">
 	            <Main />

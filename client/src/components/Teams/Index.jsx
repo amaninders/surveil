@@ -1,17 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ItemSelector from '../ItemSelector'
 import TeamStats from '../Stats/Teams/TeamStats'
 import TeamTimeBySite from '../Stats/Teams/TeamTimeBySite'
 import TeamUserList from '../Stats/Teams/TeamUserList'
+import axios from "axios";
 
 
-function Teams() {
+function Teams(props) {
+	props.setView("teams");
+
+	const [teams, setTeams] = useState([]);
+
+  useEffect(() => {
+    loadTeams();
+  }, []);
+
+  //get all teams
+  const loadTeams = async () => {
+    const allTeams = await axios.get("http://localhost:8000/api/teams", {
+      withCredentials: true,
+    });
+    setTeams(allTeams.data);
+  };
 	
 	return (
 		<>
 			<div className="container">
 				<div className="row data--item">
-					<ItemSelector item={"team"} />
+					<ItemSelector item={teams} view={props.view} Id={props.Id} setId={props.setId}/>
 			  </div>
 			</div>
 			<div className="container">
