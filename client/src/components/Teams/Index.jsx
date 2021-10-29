@@ -1,23 +1,36 @@
 import React from 'react'
-import Navigator from '../Navigator'
-import TopSites from '../Stats/General/TopSites'
-import TeamCard from '../Stats/Teams/TeamCard'
+import ItemSelector from '../ItemSelector'
+import TeamStats from '../Stats/Teams/TeamStats'
+import TeamTimeBySite from '../Stats/Teams/TeamTimeBySite'
+import TeamUserList from '../Stats/Teams/TeamUserList'
+
 
 function Teams() {
+	
 	return (
-		<main className="container py-5">
-			<Navigator />
-			<hr className="my-5" />
+		<>
 			<div className="container">
-			  <div className="row">
-						<TeamCard />
-						<TopSites />
-			  </div>
-			  <div className="row">
-			      <div className="col-xs-12"></div>
+				<div className="row data--item">
+					<ItemSelector item={"team"} />
 			  </div>
 			</div>
-		</main>
+			<div className="container">
+			  <div className="row data--item">
+					<TeamStats />
+			  </div>
+			  <div className="row data--item">
+			      <div className="col-xs-12">
+							<TeamTimeBySite />
+						</div>
+			  </div>
+				<div className="row data--item">
+			      <div className="col-xs-12">
+							<h3>All Users</h3>
+							<TeamUserList/ >
+						</div>
+			  </div>
+			</div>
+		</>
 	)
 }
 

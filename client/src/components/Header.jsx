@@ -1,3 +1,10 @@
+/*
+/
+/ renders the main header for the app
+/ => add login and auth check
+/
+*/
+
 import React from 'react'
 
 
@@ -10,11 +17,9 @@ function Header() {
 						<span className="navbar-toggler-icon"></span>
 					</button>
 					<div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
-							
-						</ul>
-					<button className="btn btn-light" style={{marginRight:"10px"}}>Login</button>&nbsp;&nbsp;
-					<button className="btn btn-light" style={{marginRight:"10px"}}>Logout</button>
+						<ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+						<button className="btn btn-light" style={{marginRight:"10px"}}>Register</button>&nbsp;&nbsp;
+						<button className="btn btn-light" style={{marginRight:"10px"}}>Logout</button>
 					</div>
 				</div>
 			</nav>

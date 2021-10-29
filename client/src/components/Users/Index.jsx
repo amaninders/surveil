@@ -1,10 +1,31 @@
 import React from 'react'
+import ItemSelector from '../ItemSelector'
+import UserHeatmap from '../Stats/Users/UserHeatmap'
+import Timeline from '../Timeline/Index'
 
 function Users() {
 	return (
-		<div>
-			<h3>Test</h3>
-		</div>
+			<>
+			<div className="container">
+				<div className="row data--item">
+					<ItemSelector item={"user"}/>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row data--item">
+					<h3>Activity Heatmap</h3>
+	        <div class="col-sm-12"> 
+					 <UserHeatmap />
+				 	</div>
+		    </div>
+		    <div class="row data--item">
+					<h3>Activity Stream</h3>
+					<div class="col-sm-12 data--item" style={{paddingTop:'20px'}}> 
+						<Timeline />
+				 	</div>
+		    </div>
+			</div>
+		</>
 	)
 }
 

@@ -1,24 +1,28 @@
 import React from 'react'
+import { NavLink } from "react-router-dom";
 
-function Navigator() {
+export default function Navigator(props) {
+
+	const menuItems = props.menu
+
+	const navigationItems =  menuItems.map(item => <NavigationItem name={item.name} to={item.to} />)
+
 	return (
 			<div className="container">
 				<div className="row text-center">
-						<div className="col-sm-4">
-							<a href="/" className="btn btn-light shadow navigation--items" role="button" data-bs-toggle="button">home</a>
-						</div>
-
-						<div className="col-sm-4">
-							<a href="/" className="btn btn-light shadow navigation--items" role="button" data-bs-toggle="button">teams</a>
-						</div>
-						
-						<div className="col-sm-4">
-							<a href="/" className="btn btn-light shadow navigation--items" role="button" data-bs-toggle="button">users</a>
-						</div>
-						
+					{navigationItems}							
 				</div>
 			</div>
 	)
 }
 
-export default Navigator
+
+function NavigationItem(props) {
+	return (
+		<div className="col-sm-4">
+			<NavLink to={props.to} activeClassName="navigation--active" className="btn btn-light shadow navigation--items">{props.name} </NavLink>
+		</div>
+	)	
+}
+
+
