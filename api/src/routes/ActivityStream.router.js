@@ -10,9 +10,10 @@ const router = express.Router();
 // GET /api/activity
 router.get("/", withUser, async function(req, res) {
   const myUser = req.myUser;
+  const whereClauses = myUser.isAdmin ? { userId: myUser.id } : {};
 
   const activities = await ActivityStream.findAll({
-    where: { userId: myUser.id },
+    where: whereClauses,
     raw: true,
   });
 

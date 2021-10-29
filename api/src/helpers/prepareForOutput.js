@@ -40,11 +40,10 @@ const prepareActivityStreamForOutput = activityStream => {
     activityStream = activityStream.toJSON();
   }
 
-  delete activityStream.userId;
-
   return renameProperties(activityStream, {
     "startTime": "start_time",
     "endTime": "end_time",
+    "userId": "user_id",
   });
 };
 
