@@ -48,7 +48,7 @@ router.get("/:profile_id", withUser, async function(req, res) {
     { raw: true },
   );
 
-  if (!myUser.isAdmin && !(activityProfile && myUser.activityProfileId === activityProfile.id)) {
+  if (!activityProfile || (!myUser.isAdmin && !myUser.isManager)) {
     throw new PermissionError();
   }
 
@@ -72,7 +72,7 @@ router.post("/:profile_id", withUser, async function(req, res) {
     { raw: true },
   );
 
-  if (!(activityProfile && myUser.activityProfileId === activityProfile.id)) {
+  if (!activityProfile || (!myUser.isAdmin && !myUser.isManager)) {
     throw new PermissionError();
   }
 
