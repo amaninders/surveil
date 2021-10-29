@@ -14,10 +14,10 @@ function ItemSelector(props) {
 		<div className="row row-cols-lg-auto g-3 align-items-center justify-content-between">
 			<div className="col-12">
 				<div className="dropdown">
-					<button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+					<button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{width:'100%'}}>
 					  select a {props.item}
 					</button>
-					<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{width:'100%'}}>
 					  {listItems}
 					</ul>
 				</div>
