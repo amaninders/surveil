@@ -12,20 +12,21 @@
 
 import './App.css';
 import Header from './components/Header';
-// import Main from './components/Main/Index';
 import Navigator from './components/Navigator';
+import Main from './components/Main/Index';
 import Teams from './components/Teams/Index';
 import Users from './components/Users/Index';
+// import Landing from './components/Landing';
 
 function App() {
   return (
     <div className="App">
 			<Header />
+			{/* <Landing /> */}
 			<main className="container py-5">
 				<Navigator />
 				<hr class="my-5" />
-				{/* <Main /> */}
-				{/* <hr class="my-5" /> */}
+				<Main />
 				<Teams />
 				<Users />
 			</main>

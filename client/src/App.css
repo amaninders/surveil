@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&display=swap');
 
 body {
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 1rem;
 	font-weight: 400;
 	line-height: 1.5;
@@ -9,6 +9,10 @@ body {
 	text-align: left;
 	color: #525f7f;
 	background-color: #f8f9fe;
+}
+
+.landing--image {
+	width:220px
 }
 .navbar--custom {
 	background-color: #95d18a !important;	
@@ -58,6 +62,15 @@ body {
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
 	}
+	.landing--image {
+		width: 620px;
+	}
+}
+
+@media (min-width: 1080px) {
+	.landing--image {
+		width: 620px;
+	}
 }
 
 .c-details span {
@@ -94,7 +107,7 @@ body {
 }
 
 .progress div {
-	background-color: red
+	background-color: sandybrown
 }
 
 .text1 {
@@ -105,5 +118,3 @@ body {
 .text2 {
 	color: #a5aec0
 }
-
-

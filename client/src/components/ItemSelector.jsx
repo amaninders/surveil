@@ -1,17 +1,24 @@
 import React from 'react'
 
-function TeamSelectors() {
+function ItemSelector(props) {
+
+	const	items = [
+		'item A',
+		'item B',
+		'item C'
+	]
+
+	const listItems = items.map(item => <ListItem name={item} />)
+
 	return (
 		<div className="row row-cols-lg-auto g-3 align-items-center justify-content-between">
 			<div className="col-12">
 				<div className="dropdown">
 					<button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-					  Select the team
+					  select a {props.item}
 					</button>
 					<ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					  <li><a className="dropdown-item" href="/">Support</a></li>
-					  <li><a className="dropdown-item" href="/">Sales</a></li>
-					  <li><a className="dropdown-item" href="/">Finance</a></li>
+					  {listItems}
 					</ul>
 				</div>
 			</div>
@@ -31,4 +38,14 @@ function TeamSelectors() {
 	)
 }
 
-export default TeamSelectors
+
+function ListItem(props) {
+	return (
+		<div>
+			<li><a className="dropdown-item" href="/">{props.name}</a></li>
+		</div>
+	)
+}
+
+
+export default ItemSelector

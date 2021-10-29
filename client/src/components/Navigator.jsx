@@ -9,11 +9,11 @@ function Navigator() {
 						</div>
 
 						<div className="col-sm-4">
-							<a href="/" className="btn btn-light shadow navigation--items" role="button" data-bs-toggle="button">teams</a>
+							<a href="/" className="btn btn-light shadow navigation--items" role="button" data-bs-toggle="button">team</a>
 						</div>
 						
 						<div className="col-sm-4">
-							<a href="/" className="btn btn-light shadow navigation--items" role="button" data-bs-toggle="button">users</a>
+							<a href="/" className="btn btn-light shadow navigation--items" role="button" data-bs-toggle="button">user</a>
 						</div>
 						
 				</div>

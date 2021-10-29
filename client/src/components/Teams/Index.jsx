@@ -1,15 +1,17 @@
 import React from 'react'
+import ItemSelector from '../ItemSelector'
 import TeamStats from '../Stats/Teams/TeamStats'
 import TeamTimeBySite from '../Stats/Teams/TeamTimeBySite'
 import TeamUserList from '../Stats/Teams/TeamUserList'
-import TeamSelectors from './TeamSelectors'
+
 
 function Teams() {
+	
 	return (
 		<>
 			<div className="container">
 				<div className="row data--item">
-					<TeamSelectors />
+					<ItemSelector item={"team"} />
 			  </div>
 			</div>
 			<div className="container">
