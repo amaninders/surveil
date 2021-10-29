@@ -4,7 +4,7 @@ import TopTeams from '../Stats/Teams/TopTeams'
 function OverallTeams() {
 	return (
 		<div class="container">
-			<div class="row data--item">
+			<div className="row data--item">
 				<h3>Top Teams</h3>
 				<TopTeams />
 			</div>

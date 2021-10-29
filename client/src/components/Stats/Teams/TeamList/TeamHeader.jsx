@@ -2,7 +2,7 @@ import React from 'react'
 
 function TeamHeader() {
 	return (
-		<thead class="table-success">
+		<thead className="table-success">
 			<tr>
 				<th>Team</th>
 				<th>Users</th>

@@ -8,13 +8,13 @@ export default function ActivityProfileNavBar(props) {
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/">
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="/">
             All Activity Profiles
           </a>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -22,10 +22,10 @@ export default function ActivityProfileNavBar(props) {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li
                 type="button"
                 className="btn btn-outline-dark ms-auto"

@@ -27,7 +27,7 @@ function Nav(props) {
         feather={item.feather}
         switchTo={switchTo}
         ariaCurrent={selected}
-        class={selected ? "nav-item active" : "nav-item"}
+        className={selected ? "nav-item active" : "nav-item"}
       />
     );
   });

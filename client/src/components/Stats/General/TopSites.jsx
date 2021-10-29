@@ -16,12 +16,12 @@ function TopSites() {
     setAllSites(allSites.data.slice(0,6));
   };
   return (
-    <div class="col-md-8 data--item">
+    <div className="col-md-8 data--item">
       <h3>Top Applications/Sites</h3>
-      <div class="card">
-        <ul class="list-group list-group-flush">
+      <div className="card">
+        <ul className="list-group list-group-flush">
 					{allSites.map((site) =>(
-						<li class="list-group-item">{site.name}</li>
+						<li className="list-group-item">{site.name}</li>
 					))}
         </ul>
       </div>

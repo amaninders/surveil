@@ -60,7 +60,7 @@ function UserHeatmap() {
 		<div className="card">
 		<div className="card-body">
 			<ReactEcharts option={graphData} />
-			<button className="btn btn-outline-success" type="button"> <i class="fas fa-redo"></i> </button>	
+			<button className="btn btn-outline-success" type="button"> <i className="fas fa-redo"></i> </button>	
 		</div>
 	</div>
 	)

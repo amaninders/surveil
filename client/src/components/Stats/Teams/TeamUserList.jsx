@@ -3,7 +3,7 @@ import UserCard from '../Users/UserCard'
 
 function TeamUserList() {
 	return (
-		<div class="row" data-masonry='{"percentPosition": true }'>
+		<div className="row" data-masonry='{"percentPosition": true }'>
       <UserCard />
       <UserCard />
       <UserCard />

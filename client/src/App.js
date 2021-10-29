@@ -36,7 +36,7 @@ function App() {
 				{/* <Landing /> */}
 				<main className="container py-5">
 					<Navigator menu={menu} />
-					<hr class="my-5" />
+					<hr className="my-5" />
 					{/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
 	        <Switch>

@@ -4,8 +4,8 @@ import TeamHeader from './TeamHeader'
 
 function TeamList() {
 	return (
-		<div class="table-responsive row--item">
-			<table class="table table-hover align-middle">
+		<div className="table-responsive row--item">
+			<table className="table table-hover align-middle">
 				<TeamHeader />
 				<TeamBody />
 			</table>

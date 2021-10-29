@@ -3,7 +3,7 @@ import TeamList from './TeamList/Index'
 
 function TopTeams() {
 	return (
-		<div class="col-xs-12 data--item">
+		<div className="col-xs-12 data--item">
 			<TeamList />
 		</div>
 	)

@@ -5,7 +5,7 @@ import TopSites from '../Stats/General/TopSites'
 function OverallSites() {
 	return (
 		<div className="container">
-			<div class="row data--item">
+			<div className="row data--item">
 				<TopSites />
 				<TimeShare />
 			</div>

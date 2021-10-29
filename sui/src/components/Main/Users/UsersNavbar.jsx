@@ -8,13 +8,13 @@ export default function UsersNavbar(props) {
 
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/">
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="/">
             All Users
           </a>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -22,24 +22,24 @@ export default function UsersNavbar(props) {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-              <form class="d-flex search-form">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
+              <form className="d-flex search-form">
                 <input
-                  class="form-control me-4 search-bar"
+                  className="form-control me-4 search-bar"
                   type="search"
                   placeholder="Search Users"
                   aria-label="Search"
                 />
-                <button class="btn btn-success" type="submit">
+                <button className="btn btn-success" type="submit">
                   Search
                 </button>
               </form>
-              <li class="nav-item dropdown ms-5">
+              <li className="nav-item dropdown ms-5">
                 <a
-                  class="nav-link dropdown-toggle sort-users"
+                  className="nav-link dropdown-toggle sort-users"
                   href="/"
                   id="navbarDropdown"
                   role="button"
@@ -48,17 +48,17 @@ export default function UsersNavbar(props) {
                 >
                   Sort Users
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li class="dropdown-item">Name (A-Z)</li>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li className="dropdown-item">Name (A-Z)</li>
                   <li>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                   </li>
-                  <li class="dropdown-item">High to Low Productivity</li>
-                  <li class="dropdown-item">Low to High Productivity</li>
+                  <li className="dropdown-item">High to Low Productivity</li>
+                  <li className="dropdown-item">Low to High Productivity</li>
                 </ul>
               </li>
             </ul>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li
                 type="button"
                 className="btn btn-outline-dark ms-auto"

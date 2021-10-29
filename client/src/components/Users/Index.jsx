@@ -11,16 +11,16 @@ function Users() {
 					<ItemSelector item={"user"}/>
 				</div>
 			</div>
-			<div class="container">
-				<div class="row data--item">
+			<div className="container">
+				<div className="row data--item">
 					<h3>Activity Heatmap</h3>
-	        <div class="col-sm-12"> 
+	        <div className="col-sm-12"> 
 					 <UserHeatmap />
 				 	</div>
 		    </div>
-		    <div class="row data--item">
+		    <div className="row data--item">
 					<h3>Activity Stream</h3>
-					<div class="col-sm-12 data--item" style={{paddingTop:'20px'}}> 
+					<div className="col-sm-12 data--item" style={{paddingTop:'20px'}}> 
 						<Timeline />
 				 	</div>
 		    </div>

@@ -5,7 +5,7 @@ function NavItem(props) {
 		<li className={props.class} onClick={(e) => props.switchTo(e, props.name)} aria-current={props.ariaCurrent}>
       <a className="nav-link" href="/">
         <span data-feather={props.feather}></span>
-				<i class="fas fa-layer-group"></i>
+				<i className="fas fa-layer-group"></i>
         {props.name}
       </a>
     </li>
