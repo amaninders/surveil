@@ -1,11 +1,12 @@
 const express = require("express");
+const Sequelize = require("sequelize");
 const withUser = require("../middleware/withUser");
 const { NotFoundError } = require("../errors");
 const {
   prepareUserForOutput,
   prepareTeamForOutput,
 } = require("../helpers/prepareForOutput");
-const { User, Team } = require("../models");
+const { User, Team, ActivityStream } = require("../models");
 
 const router = express.Router();
 
@@ -26,17 +27,19 @@ router.get("/", withUser, async function(req, res) {
 });
 
 // GET /api/teams/:team_id
-router.get("/:team_id", async function(req, res) {
-  const userId = req.user.id;
+router.get("/:team_id", withUser, async function(req, res) {
+  const myUser = req.myUser;
   const teamId = req.params.team_id;
+  const whereClauses = { id: teamId };
+
+  // A manager should only be able to see their own teams
+  if (!myUser.isAdmin) {
+    whereClauses.managerId = myUser.id;
+  }
 
   // Query for the desired team but make sure they have permissions to access it
   let team = await Team.findOne({
-    where: {
-      id: teamId,
-      // A manager should only be able to see their own teams
-      managerId: userId,
-    },
+    where: whereClauses,
     raw: true,
   });
   if (!team) {
@@ -50,10 +53,28 @@ router.get("/:team_id", async function(req, res) {
     attributes: { exclude: [ "teamId", "isAdmin", "isManager" ] },
   });
 
-  team = prepareTeamForOutput(team);
+  // Find number of sites visited by any member of the team and total time spent on any of them
+  const { totalTimeSpent } = await ActivityStream.findOne({
+    attributes: [
+      [Sequelize.literal('SUM(EXTRACT(EPOCH FROM ("endTime" - "startTime")))'), "totalTimeSpent"],
+    ],
+    raw: true,
+  });
 
+  const totalSites = await ActivityStream.count({
+    include: [User],
+    distinct: true,
+    col: "name",
+    raw: true,
+  });
+  
   res.json({
-    ...team,
+    ...prepareTeamForOutput(team),
+    /* eslint-disable camelcase */
+    total_time: totalTimeSpent,
+    total_sites: totalSites,
+    total_users: members.length,
+    /* eslint-enable camelcase */
     members: members.map(prepareUserForOutput)
   });
 });
