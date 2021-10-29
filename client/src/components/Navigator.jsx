@@ -5,7 +5,7 @@ export default function Navigator(props) {
 
 	const menuItems = props.menu
 
-	const navigationItems =  menuItems.map(item => <NavigationItem name={item.name} to={item.to} />)
+	const navigationItems =  menuItems.map((item, index) => <NavigationItem key={index} name={item.name} to={item.to} />)
 
 	return (
 			<div className="container">

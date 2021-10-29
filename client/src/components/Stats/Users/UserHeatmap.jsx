@@ -2,7 +2,7 @@ import React from 'react'
 import * as echarts from 'echarts';
 import ReactEcharts from 'echarts-for-react';
 
-function getVirtulData(year) {
+function getData(year) {
   year = year || '2017';
   let date = +echarts.number.parseDate(year + '-01-01');
   let end = +echarts.number.parseDate(+year + 1 + '-01-01');
@@ -20,11 +20,6 @@ function getVirtulData(year) {
 
 // in production fetch this data from server
 const graphData = {
-  title: {
-    top: 30,
-    left: 'center',
-    text: 'Daily Compliance'
-  },
   tooltip: {},
   visualMap: {
     min: 0,
@@ -34,7 +29,7 @@ const graphData = {
     left: 'center',
     top: 65,
 		inRange : {   
-			color: ['#d8f2d3', '#95d18a' ] //From smaller to bigger value ->
+			color: ['#fff', '#95d18a' ] //From smaller to bigger value ->
 		}
   },
   calendar: {
@@ -51,7 +46,7 @@ const graphData = {
   series: {
     type: 'heatmap',
     coordinateSystem: 'calendar',
-    data: getVirtulData('2016')
+    data: getData('2016')
   }
 };
 

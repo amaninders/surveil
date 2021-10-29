@@ -13,7 +13,7 @@ function Users() {
 			</div>
 			<div className="container">
 				<div className="row data--item">
-					<h3>Activity Heatmap</h3>
+					<h3>Compliance Heatmap</h3>
 	        <div className="col-sm-12"> 
 					 <UserHeatmap />
 				 	</div>
