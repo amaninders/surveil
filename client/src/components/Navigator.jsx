@@ -1,24 +1,27 @@
 import React from 'react'
 
-function Navigator() {
+export default function Navigator(props) {
+
+	const menuItems = props.menu
+
+	const navigationItems =  menuItems.map(item => <NavigationItem name={item} />)
+
 	return (
 			<div className="container">
 				<div className="row text-center">
-						<div className="col-sm-4">
-							<a href="/" className="btn btn-light shadow navigation--items" role="button" data-bs-toggle="button">home</a>
-						</div>
-
-						<div className="col-sm-4">
-							<a href="/" className="btn btn-light shadow navigation--items" role="button" data-bs-toggle="button">team</a>
-						</div>
-						
-						<div className="col-sm-4">
-							<a href="/" className="btn btn-light shadow navigation--items" role="button" data-bs-toggle="button">user</a>
-						</div>
-						
+					{navigationItems}							
 				</div>
 			</div>
 	)
 }
 
-export default Navigator
+
+function NavigationItem(props) {
+	return (
+		<div className="col-sm-4">
+			<a href="/" className="btn btn-light shadow navigation--items" role="button" data-bs-toggle="button">{props.name}</a>
+		</div>
+	)	
+}
+
+

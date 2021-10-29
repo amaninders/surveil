@@ -24,7 +24,7 @@ function App() {
 			<Header />
 			{/* <Landing /> */}
 			<main className="container py-5">
-				<Navigator />
+				<Navigator menu={['home', 'team', 'user']} />
 				<hr class="my-5" />
 				<Main />
 				<Teams />
