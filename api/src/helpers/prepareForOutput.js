@@ -40,11 +40,21 @@ const prepareActivityStreamForOutput = activityStream => {
     activityStream = activityStream.toJSON();
   }
 
-  delete activityStream.userId;
-
   return renameProperties(activityStream, {
     "startTime": "start_time",
     "endTime": "end_time",
+    "userId": "user_id",
+  });
+};
+
+const prepareActivityProfileItemForOutput = activityProfileItem => {
+  if (activityProfileItem.toJSON) {
+    activityProfileItem = activityProfileItem.toJSON();
+  }
+
+  return renameProperties(activityProfileItem, {
+    "expectedTime": "expected_time",
+    "activityProfileId": "activity_profile_id",
   });
 };
 
@@ -62,5 +72,6 @@ module.exports = {
   prepareUserForOutput,
   prepareOrganizationForOutput,
   prepareActivityStreamForOutput,
+  prepareActivityProfileItemForOutput,
   prepareTeamForOutput,
 };

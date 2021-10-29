@@ -1,7 +1,11 @@
 const express = require("express");
 
 const withUser = require("../middleware/withUser");
-const { ActivityProfile } = require("../models");
+const { prepareActivityProfileItemForOutput } = require("../helpers/prepareForOutput");
+const {
+  ActivityProfile,
+  ActivityProfileItem,
+} = require("../models");
 const { PermissionError } = require("../errors");
 
 const router = express.Router();
@@ -35,31 +39,55 @@ router.post("/", withUser, async function(req, res) {
 });
 
 // GET /api/activity_profile/:profile_id
-router.get("/:profile_id", async function(req, res) {
+router.get("/:profile_id", withUser, async function(req, res) {
+  const myUser = req.myUser;
   const activityProfileId = req.params.profile_id;
-  const activities = await ActivityProfile.findByPk(
+
+  const activityProfile = await ActivityProfile.findByPk(
     activityProfileId,
     { raw: true },
   );
 
-  res.json(activities);
-});
-
-// POST /api/activity_profile/:profile_id
-router.post("/", withUser, async function(req, res) {
-  if (!req.myUser.isAdmin && !req.myUser.isManager) {
+  if (!activityProfile || (!myUser.isAdmin && !myUser.isManager)) {
     throw new PermissionError();
   }
 
-  const { name, title, expectedTime } = req.body;
-  const newActivity = await ActivityProfile.create({
+  const activityItems = await ActivityProfileItem.findAll({
+    where: { activityProfileId }
+  }, { raw: true });
+
+  res.json({
+    ...activityProfile,
+    items: activityItems.map(prepareActivityProfileItemForOutput),
+  });
+});
+
+// POST /api/activity_profile/:profile_id
+router.post("/:profile_id", withUser, async function(req, res) {
+  const myUser = req.myUser;
+  const activityProfileId = req.params.profile_id;
+
+  const activityProfile = await ActivityProfile.findByPk(
+    activityProfileId,
+    { raw: true },
+  );
+
+  if (!activityProfile || (!myUser.isAdmin && !myUser.isManager)) {
+    throw new PermissionError();
+  }
+
+  const {
     name,
-    title,
+    expected_time: expectedTime
+  } = req.body;
+  const newActivityProfileItem = await ActivityProfileItem.create({
+    name,
     expectedTime,
+    activityProfileId,
     raw: true,
   });
 
-  res.json(newActivity);
+  res.json(prepareActivityProfileItemForOutput(newActivityProfileItem));
 });
 
 module.exports = router;
