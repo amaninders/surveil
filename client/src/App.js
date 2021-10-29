@@ -22,9 +22,6 @@ import { useState } from "react";
 
 function App() {
   const [view, setView] = useState();
-  const [Id, setId] = useState({
-    id: 1,
-  });
 
   const menu = [
     { name: "home", to: "/main" },
@@ -44,10 +41,10 @@ function App() {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/Teams">
-              <Teams view={view} setView={setView} Id={Id} setId={setId} />
+              <Teams view={view} setView={setView} />
             </Route>
             <Route path="/users">
-              <Users view={view} setView={setView} Id={Id} setId={setId} />
+              <Users view={view} setView={setView} />
             </Route>
             <Route path="/main">
               <Main />
