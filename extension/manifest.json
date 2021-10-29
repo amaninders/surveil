@@ -1,0 +1,34 @@
+{
+  "name": "Surveil",
+  "description": "Collects data for teams on Surveil",
+  "version": "1.0",
+  "manifest_version": 3,
+	"action": {
+    "default_icon": {              
+      "16": "images/logo.ico",
+      "24": "images/logo.ico",
+      "32": "images/logo.ico"  
+    },
+    "default_title": "Surveil",
+    "default_popup": "popup-sign-in.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+		"matches": ["<all_urls>"]
+  },
+	"permissions": [
+    "tabs",
+		"notifications",
+		"storage"
+  ],
+	"host_permissions": [
+		"<all_urls>"
+	],
+	"content_scripts": [ {
+	    "js": ["thirdparty/jquery.min.js", "content.js"],
+	    "matches": ["<all_urls>"],
+			"all_frames": true,
+			"run_at": "document_start"
+		}
+	]
+}
