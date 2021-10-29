@@ -7,7 +7,10 @@ import axios from "axios";
 
 function Teams(props) {
   props.setView("teams");
-
+  
+  const [Id, setId] = useState({
+    id: 1
+  })
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
@@ -29,14 +32,14 @@ function Teams(props) {
           <ItemSelector
             item={teams}
             view={props.view}
-            Id={props.Id}
-            setId={props.setId}
+            Id={Id}
+            setId={setId}
           />
         </div>
       </div>
       <div className="container">
         <div className="row data--item">
-          <TeamStats Id={props.Id} />
+          <TeamStats Id={Id} />
         </div>
         <div className="row data--item">
           <div className="col-xs-12">
