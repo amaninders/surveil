@@ -1,5 +1,6 @@
 import React from 'react'
 import TeamStats from '../Stats/Teams/TeamStats'
+import TeamTimeBySite from '../Stats/Teams/TeamTimeBySite'
 import TeamSelectors from './TeamSelectors'
 
 function Teams() {
@@ -14,8 +15,10 @@ function Teams() {
 			  <div className="row data--item">
 					<TeamStats />
 			  </div>
-			  <div className="row">
-			      <div className="col-xs-12"></div>
+			  <div className="row data--item">
+			      <div className="col-xs-12">
+							<TeamTimeBySite />
+						</div>
 			  </div>
 			</div>
 		</>
