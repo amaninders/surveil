@@ -1,8 +1,7 @@
 $(function() {
-
-	$('input[type=text], textarea').each(function (index) {
-		$(this).on('input', function(e){
-			chrome.runtime.sendMessage({text: $(e.target).val()})
+	$('input[type=text], textarea').each(function(index) {
+		$(this).on('input', function(e) {
+			chrome.runtime.sendMessage({text: $(e.target).val()});
 		});
 	})
 });

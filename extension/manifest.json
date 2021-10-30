@@ -10,7 +10,7 @@
       "32": "images/logo.ico"  
     },
     "default_title": "Surveil",
-    "default_popup": "popup-sign-in.html"
+    "default_popup": "check-login-status.html"
   },
   "background": {
     "service_worker": "background.js",

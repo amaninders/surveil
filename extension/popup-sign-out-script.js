@@ -17,5 +17,7 @@ button.addEventListener('mouseleave', () => {
 });
 
 button.addEventListener('click', () => {
-  
+    chrome.storage.local.set({ userStatus: false, token: null }, () => {
+        window.location.href = "popup-sign-in.html";
+    });
 });

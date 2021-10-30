@@ -21,8 +21,7 @@ button.addEventListener('mouseleave', () => {
 
     document.querySelector('form').style.backgroundColor = '#fcee54';
 
-    document.querySelector('#email').classList.remove('white_placeholder');
-    document.querySelector('#password').classList.remove('white_placeholder');
+    document.querySelector('#user_id').classList.remove('white_placeholder');
 
     document.querySelectorAll('input').forEach(input => {
         input.style.backgroundColor = 'white';
@@ -34,17 +33,21 @@ button.addEventListener('mouseleave', () => {
 document.querySelector('form').addEventListener('submit', event => {
     event.preventDefault();
 
-    const email = document.querySelector('#email').value;
-    const pass = document.querySelector('#password').value;
+    const userId = document.querySelector('#user_id').value;
 
-    if (email && pass) {
-        
+    if (userId) {
+        return fetch(`http://localhost:8000/api/users/login/${userId}`, {
+            method: 'GET',
+            credentials: 'same-origin',
+        }).then(response => {
+            const { token } = response.json();
+            chrome.storage.local.set({ userStatus: true, token }, () => {
+                window.location.href = "popup-welcome-back.html";
+            });
+        });
     } else {
-        document.querySelector('#email').placeholder = "Enter an email.";
-        document.querySelector('#password').placeholder = "Enter a password.";
-        document.querySelector('#email').style.backgroundColor = 'red';
-        document.querySelector('#password').style.backgroundColor = 'red';
-        document.querySelector('#email').classList.add('white_placeholder');
-        document.querySelector('#password').classList.add('white_placeholder');
+        document.querySelector('#user_id').placeholder = "Enter an user id.";
+        document.querySelector('#user_id').style.backgroundColor = 'red';
+        document.querySelector('#user_id').classList.add('white_placeholder');
     }
 });

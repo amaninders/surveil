@@ -1,58 +1,3 @@
-function flip_user_status(signIn, user_info) {
-	if (signIn) {
-			return fetch('http://localhost:3000/login', {
-					method: 'GET',
-					headers: {
-							'Authorization': 'Basic ' + btoa(`${user_info.email}:${user_info.pass}`)
-					}
-			})
-					.then(res => {
-							return new Promise(resolve => {
-									if (res.status !== 200) resolve('fail')
-
-									chrome.storage.local.set({ userStatus: signIn, user_info }, function (response) {
-											if (chrome.runtime.lastError) resolve('fail');
-
-											user_signed_in = signIn;
-											resolve('success');
-									});
-							})
-					})
-					.catch(err => console.log(err));
-	} else if (!signIn) {
-
-    // fetch the surveil/logout route
-    return new Promise(resolve => {
-        chrome.storage.local.get(['userStatus', 'user_info'], function (response) {
-            console.log(response);
-            if (chrome.runtime.lastError) resolve('fail');
-
-            if (response.userStatus === undefined) resolve('fail');
-
-            fetch('http://localhost:3000/logout', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Basic ' + btoa(`${response.user_info.email}:${response.user_info.pass}`)
-                }
-            })
-                .then(res => {
-                    console.log(res);
-                    if (res.status !== 200) resolve('fail');
-
-                    chrome.storage.local.set({ userStatus: signIn, user_info: {} }, function (response) {
-                        if (chrome.runtime.lastError) resolve('fail');
-
-                        user_signed_in = signIn;
-                        resolve('success');
-                    });
-                })
-                .catch(err => console.log(err));
-        });
-    });
-	}
-}
-
-
 function is_user_signed_in() {
     return new Promise(resolve => {
         chrome.storage.local.get(['userStatus', 'user_info'],
@@ -70,23 +15,37 @@ function is_user_signed_in() {
 
 
 function addListener() {
-
-	function doSomething (tab, screenshot = null) {
-		return {
+	function addActivityStream(tab, screenshot = null) {
+		const body = {
 			name: tab.url,
 			app_img: tab.favIconUrl,
 			title: tab.title,
 			screenshot: screenshot,
 		};
+
+		return fetch("http://localhost:8000/api/activity", {
+			method: "POST",
+			credentials: "same-origin",
+			headers: { "Content-Type": "application/json" },
+			referrerPolicy: "no-referrer",
+			body: JSON.stringify(body),
+		}).then(response => response.json());
+	}
+
+	function setActivityStreamDuration(activityStreamId) {
+		return fetch(`http://localhost:8000/api/activity/${activityStreamId}/end_time`, {
+			method: "PUT",
+			credentials: "same-origin",
+			referrerPolicy: "no-referrer",
+		}).then(response => response.json());
 	}
 	
 	chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 		if (changeInfo.status && changeInfo.status === 'complete') {
-			console.log(doSomething(tab))
 						// send screenshot instruction
 						chrome.tabs.captureVisibleTab()
 						.then(screenshotBlob => {
-							doSomething(tab, screenshotBlob)
+							addActivityStream(tab, screenshotBlob)
 						})
 						.catch(error => console.log(error))
 		}
@@ -104,8 +63,28 @@ function addListener() {
 	);
 }
 
+const waitUntilLogin = callback => {
+	chrome.storage.local.get(["userStatus"], response => {
+		const isLoggedIn = !!response.userStatus;
+		if (isLoggedIn) {
+			return callback();
+		}
 
-addListener();
+		chrome.storage.local.onChanged.addListener(function listener() {
+			const isLoggedIn = !!response.userStatus;
+			if (!isLoggedIn) {
+				return;
+			}
+
+			chrome.storage.local.onChanged.removeListener(listener);
+			return callback();
+		});
+	});
+};
+
+waitUntilLogin(() => {
+	addListener();
+});
 
 
 // // The minimum prediction confidence.
