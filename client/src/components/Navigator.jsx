@@ -1,9 +1,13 @@
 import React from 'react'
 import { NavLink } from "react-router-dom";
 
-export default function Navigator(props) {
+export default function Navigator() {
 
-	const menuItems = props.menu
+	const menuItems = [
+    { name: "home", to: "/main" },
+    { name: "teams", to: "/teams" },
+    { name: "users", to: "/users" },
+  ];
 
 	const navigationItems =  menuItems.map((item, index) => <NavigationItem key={index} name={item.name} to={item.to} />)
 

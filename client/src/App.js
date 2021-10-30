@@ -9,33 +9,49 @@
 /
 */
 
+// import css
 import "./App.css";
-import Header from "./components/Header";
-import Navigator from "./components/Navigator";
-import Main from "./components/Main/Index";
-import Teams from "./components/Teams/Index";
-import Users from "./components/Users/Index";
-// import Landing from './components/Landing';
 
+// import compnonents
+import Landing   from './components/Landing';
+import Header    from "./components/Header";
+import Navigator from "./components/Navigator";
+import Main 		 from "./components/Main/Index";
+import Teams     from "./components/Teams/Index";
+import Users     from "./components/Users/Index";
+
+// import hooks
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState } from "react";
+import useToken from './hooks/useToken';
 
+
+// The main App function
 function App() {
-  const [view, setView] = useState();
+  
+	// token to control the user access and authentication
+	const { token, setToken } = useToken();
 
-  const menu = [
-    { name: "home", to: "/main" },
-    { name: "teams", to: "/teams" },
-    { name: "users", to: "/users" },
-  ];
+	// token to set the current view in use
+	const [view, setView] 	= useState();
+
+	// render the login page if the user is not logged in (a.k.a token cannot be found)
+	if(!token) {
+    return (
+			<>
+				<Header token={token}/>
+				<Landing setToken={setToken} />
+			</>
+		)
+  }
 
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header token={token}/>
         {/* <Landing /> */}
         <main className="container py-5">
-          <Navigator menu={menu} />
+          <Navigator />
           <hr className="my-5" />
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
