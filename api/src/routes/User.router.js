@@ -83,6 +83,90 @@ router.post("/", withUser, async function(req, res) {
   res.json(prepareUserForOutput(newUser.toJSON()));
 });
 
+// PUT /api/users/:user_id
+router.put("/:user_id", withUser, async function(req, res) {
+  const myUser = req.myUser;
+  const userId = req.params.user_id === "me" ? myUser.id : Number(req.params.user_id);
+
+  if (!(await isManagerOf(myUser, userId))) {
+    throw PermissionError();
+  }
+
+  const {
+    first_name: firstName,
+    last_name: lastName,
+    browser_agent: browserAgent,
+  } = req.body;
+
+  const updates = {};
+
+  if (firstName) {
+    updates.firstName = firstName;
+  }
+
+  if (lastName) {
+    updates.lastName = lastName;
+  }
+
+  if (browserAgent) {
+    updates.browserAgent = browserAgent;
+  }
+
+  if (myUser.isAdmin) {
+    const {
+      activity_profile_id: activityProfileId,
+      team_id: teamId,
+      is_manager: isManager,
+    } = req.body;
+
+    if (activityProfileId) {
+      updates.activityProfileId = activityProfileId;
+    }
+
+    if (teamId) {
+      updates.teamId = teamId;
+    }
+
+    if (isManager) {
+      updates.isManager = isManager;
+    }
+  }
+
+  const result = await User.update(
+    updates,
+    {
+      where: { id: userId },
+      returning: true,
+    },
+  );
+  const updatedUser = result["1"][0];
+
+  res.json(prepareUserForOutput(updatedUser));
+});
+
+router.delete("/:user_id", withUser, async function(req, res) {
+  const myUser = req.myUser;
+  const userId = req.params.user_id === "me" ? myUser.id : Number(req.params.user_id);
+
+  if (!myUser.isAdmin && userId !== myUser.id) {
+    throw PermissionError();
+  }
+
+  await User.destroy({ where: { id: userId } });
+
+  // Logout if signed in account deleted
+  if (req.params.user_id === "me" || myUser.id == req.params.user_id) {
+    auth.logout(res);
+  }
+
+  res.json({ message: "User successfully deleted!" });
+});
+
+router.get("/logout", function(_, res) {
+  auth.logout(res);
+  res.json({ message: "Successfully logged out!" });
+});
+
 // Debug routes below
 if (process.env.NODE_ENV !== "production") {
   // GET /api/users/login/:user_id
