@@ -49,7 +49,7 @@ function Teams(props) {
         </div>
         <div className="row data--item">
           <div className="col-xs-12">
-            <TeamTimeBySite Id={Id}/>
+            <TeamTimeBySite Id={Id} toggle={toggle} />
           </div>
         </div>
         <div className="row data--item">

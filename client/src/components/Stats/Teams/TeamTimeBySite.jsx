@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
 import axios from "axios";
 import { teamTimeBySite } from "../../../helpers/fetchTeamTimeBySite";
+import { displayActivitiesByTime } from "../../../helpers/fetchActivitiesByTime";
 
 // in production fetch this data from server
 
@@ -34,9 +35,11 @@ function TeamTimeBySite(props) {
     setActivities(allActivities.data);
   };
 
-  const Result = teamTimeBySite(teamMembers, activities);
-  const xAxisData = Object.keys(Result);
-  const yAxisData = Object.values(Result);
+  const activitiesByTime = displayActivitiesByTime(activities, props.toggle.btnradio)
+
+  const result = teamTimeBySite(teamMembers, activitiesByTime);
+  const xAxisData = Object.keys(result);
+  const yAxisData = Object.values(result);
 
   return (
     <div className="card">
