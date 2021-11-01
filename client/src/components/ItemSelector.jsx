@@ -1,7 +1,6 @@
 import React from "react";
 
 function ItemSelector(props) {
-  
   const onToggleChange = (e) => {
     props.setToggle({ [e.target.name]: e.target.value });
   };
@@ -14,6 +13,9 @@ function ItemSelector(props) {
     <div className="row row-cols-lg-auto g-3 align-items-center justify-content-between">
       <div className="col-12">
         <form>
+          <label className="form-label">
+            {`Select a ${props.view === "users" ? "user" : "team"}`}{" "}
+          </label>
           <select
             className="form-select"
             name="id"
