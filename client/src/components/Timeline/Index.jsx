@@ -20,7 +20,7 @@ function Timeline(props) {
         withCredentials: true,
       }
     );
-    setActivities(allActivities.data);
+    setActivities(allActivities.data.reverse());
   };
 
   const testing = displayActivitiesByTime(activities, props.toggle.btnradio);
