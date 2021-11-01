@@ -124,6 +124,9 @@
     { title: "jsfiddle.org", name: "JSFiddle" },
     { title: "draw.io", name: "Draw.io" },
     { title: "lucidchart.com", name: "LucidChart" },
+    { title: "developer.mozilla.org", name: "MDN Web Docs" },
+    { title: "reactjs.org", name: "React - A JavaScript library for building user interfaces" },
+    { title: "css-tricks.com", name: "CSS-Tricks" },
   ];
 
   const randomRangeInt = (start, end) => {
