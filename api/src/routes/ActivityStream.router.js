@@ -1,6 +1,6 @@
 const express = require("express");
 const Sequelize = require("sequelize");
-
+const { addIsCompliantFields } = require("../helpers/activityStream");
 const { prepareActivityStreamForOutput } = require("../helpers/prepareForOutput");
 const withUser = require("../middleware/withUser");
 const { ActivityStream } = require("../models");
@@ -16,6 +16,8 @@ router.get("/", withUser, async function(req, res) {
     where: whereClauses,
     raw: true,
   });
+
+  await addIsCompliantFields(activities);
 
   res.json(activities.map(prepareActivityStreamForOutput));
 });
@@ -33,6 +35,8 @@ router.post("/", async function(req, res) {
     name,
     title,
   });
+
+  await addIsCompliantFields([newActivity]);
 
   res.json(prepareActivityStreamForOutput(newActivity));
 });
@@ -54,6 +58,8 @@ router.put("/:activity_id/end_time", async function(req, res) {
     },
   );
   const activityStream = result[1]["0"] || {};
+
+  await addIsCompliantFields([activityStream]);
 
   res.json(prepareActivityStreamForOutput(activityStream));
 });

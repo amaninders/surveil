@@ -3,6 +3,7 @@ const express = require("express");
 const { NotFoundError, PermissionError } = require("../errors");
 const withUser = require("../middleware/withUser");
 const auth = require("../helpers/auth");
+const { addIsCompliantFields } = require("../helpers/activityStream");
 const {
   getOptionsForUsersManagedBy,
   isManagerOf,
@@ -44,6 +45,8 @@ router.get("/:user_id/activity", withUser, async function(req, res) {
     where: { userId: otherUser.id },
     raw: true,
   });
+
+  await addIsCompliantFields(activities);
 
   res.json(activities.map(prepareActivityStreamForOutput));
 });

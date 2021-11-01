@@ -12,7 +12,7 @@ router.get("/", async function(_, res) {
       "name",
       [Sequelize.literal('SUM(EXTRACT(EPOCH FROM ("endTime" - "startTime")))'), "value"]
     ],
-    group: ['name'],
+    group: ["name"],
     order: Sequelize.literal('"value" DESC'),
     raw: true
   });

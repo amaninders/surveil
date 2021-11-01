@@ -44,6 +44,7 @@ const prepareActivityStreamForOutput = activityStream => {
     "startTime": "start_time",
     "endTime": "end_time",
     "userId": "user_id",
+    "isCompliant": "is_compliant",
   });
 };
 
