@@ -8,10 +8,10 @@ import axios from "axios";
 function Teams(props) {
   props.setView("teams");
   
+  const [teams, setTeams] = useState([]);
   const [Id, setId] = useState({
     id: 1
   })
-  const [teams, setTeams] = useState([]);
 
   const [toggle, setToggle] = useState({
     btnradio: "All",
@@ -49,7 +49,7 @@ function Teams(props) {
         </div>
         <div className="row data--item">
           <div className="col-xs-12">
-            <TeamTimeBySite />
+            <TeamTimeBySite Id={Id}/>
           </div>
         </div>
         <div className="row data--item">
