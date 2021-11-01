@@ -41,7 +41,7 @@ function TeamTimeBySite(props) {
   return (
     <div className="card">
       <div className="card-body">
-        <h3>Time by site</h3>
+        <h3>Visits on each Site</h3>
         <ReactEcharts
           option={{
             xAxis: {
