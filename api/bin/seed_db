@@ -6,6 +6,8 @@
     User,
     Team,
     ActivityStream,
+    ActivityProfile,
+    ActivityProfileItem,
   } = require("../src/models");
 
   // Add user "Jeff Bezos" with owner "Amazon"
@@ -49,6 +51,31 @@
     managerId: janeDoe.id,
   });
 
+  // Add "Developer" activity profile
+  // {
+  const activityProfile = await ActivityProfile.create({ name: "Developer" });
+  const activityProfileItemsData = [{
+    name: "Github",
+    expectedTime: 240,
+  }, {
+    name: "Facebook",
+    expectedTime: 240,
+  }, {
+    name: "StackOverflow",
+    expectedTime: 240,
+  }, {
+    name: "Draw.io",
+    expectedTime: 240,
+  }];
+
+  for (const { name, expectedTime } of activityProfileItemsData) {
+    await ActivityProfileItem.create({
+      name,
+      expectedTime,
+      activityProfileId: activityProfile.id,
+    });
+  }
+  
   // Add employees to "Data Science"
   const makeAccountEmployeeData = (firstName, lastName) => ({
     firstName,
@@ -71,6 +98,7 @@
     lastName,
     teamId: frontEndTeam.id,
     organizationId: amazon.id,
+    activityProfileId: activityProfile.id,
   });
 
   const frontEndEmployees = await User.bulkCreate([
@@ -83,19 +111,19 @@
 
   // Auto-generate activity profiles for users
   const commonSites = [
-    { name: "StackOverflow", title: "stackoverflow.com" },
-    { name: "stackexchange.com", title: "StackExchange" },
-    { name: "github.com", title: "Github" },
+    { title: "stackoverflow.com", name: "StackOverflow" },
+    { title: "stackexchange.com", name: "StackExchange" },
+    { title: "github.com", name: "Github" },
   ];
   const dataScienceSites = [
     ...commonSites,
-    { name: "www.tensorflow.org", title: "Tensorflow" },
+    { title: "www.tensorflow.org", name: "Tensorflow" },
   ];
   const frontEndSites = [
     ...commonSites,
-    { name: "jsfiddle.org", title: "JSFiddle" },
-    { name: "draw.io", title: "Draw.io" },
-    { name: "lucidchart.com", title: "LucidChart" },
+    { title: "jsfiddle.org", name: "JSFiddle" },
+    { title: "draw.io", name: "Draw.io" },
+    { title: "lucidchart.com", name: "LucidChart" },
   ];
 
   const randomRangeInt = (start, end) => {
@@ -115,7 +143,7 @@
 
     while (runningDate < nowDate) {
       const site = randomElementUniform(sites);
-      const duration = randomRangeInt(1, 180);
+      const duration = randomRangeInt(160, 320);
 
       const startTime = new Date(runningDate.getTime());
       runningDate.setMinutes(runningDate.getMinutes() + duration);
