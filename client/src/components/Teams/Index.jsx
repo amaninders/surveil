@@ -13,6 +13,10 @@ function Teams(props) {
   })
   const [teams, setTeams] = useState([]);
 
+  const [toggle, setToggle] = useState({
+    btnradio: "All",
+  });
+
   useEffect(() => {
     loadTeams();
   }, []);
@@ -34,6 +38,8 @@ function Teams(props) {
             view={props.view}
             Id={Id}
             setId={setId}
+            toggle={toggle}
+            setToggle={setToggle}
           />
         </div>
       </div>

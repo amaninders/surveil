@@ -6,11 +6,15 @@ import axios from "axios";
 
 function Users(props) {
   props.setView("users");
+  const [users, setUsers] = useState([]);
+
 	const [Id, setId] = useState({
     id: 1,
   });
+  const [toggle, setToggle] = useState({
+    btnradio: "All",
+  });
 
-  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     loadUsers();
@@ -33,6 +37,8 @@ function Users(props) {
             view={props.view}
             Id={Id}
             setId={setId}
+            toggle={toggle}
+            setToggle={setToggle}
           />
         </div>
       </div>
@@ -46,7 +52,7 @@ function Users(props) {
         <div className="row data--item">
           <h3>Activity Stream</h3>
           <div className="col-sm-12 data--item" style={{ paddingTop: "20px" }}>
-            <Timeline Id={Id} />
+            <Timeline Id={Id} toggle={toggle}/>
           </div>
         </div>
       </div>
