@@ -2,7 +2,6 @@ import React from "react";
 
 function ItemSelector(props) {
   
-
   const onToggleChange = (e) => {
     props.setToggle({ [e.target.name]: e.target.value });
   };
@@ -11,7 +10,6 @@ function ItemSelector(props) {
     props.setId({ [e.target.name]: e.target.value });
   };
 
-  console.log(props.Id);
   return (
     <div className="row row-cols-lg-auto g-3 align-items-center justify-content-between">
       <div className="col-12">

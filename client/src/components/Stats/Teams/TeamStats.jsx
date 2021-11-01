@@ -19,8 +19,6 @@ function TeamStats(props) {
     setTeamStats(teamStats.data);
   };
 
-  console.log("Team stats", teamStats);
-
   return (
     <div className="container">
       <div className="row data--item">
