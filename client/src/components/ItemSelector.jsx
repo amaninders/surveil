@@ -19,7 +19,6 @@ function ItemSelector(props) {
           <select
             className="form-select"
             name="id"
-            value={props.item.id}
             onChange={onInputChange}
           >
             <option hidden disabled value>
@@ -40,6 +39,8 @@ function ItemSelector(props) {
           <div
             className="btn-group"
             role="group"
+            value={props.toggle}
+            defaultChecked
             aria-label="Basic radio toggle button group"
             style={{ width: "100%" }}
           >
@@ -51,6 +52,7 @@ function ItemSelector(props) {
               id="btnradio1"
               autoComplete="off"
               onChange={onToggleChange}
+              defaultChecked
             />
             <label className="btn btn-outline-secondary" htmlFor="btnradio1">
               All
