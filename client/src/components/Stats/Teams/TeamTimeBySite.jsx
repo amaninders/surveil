@@ -40,27 +40,34 @@ function TeamTimeBySite(props) {
   const result = teamTimeBySite(teamMembers, activitiesByTime);
   const xAxisData = Object.keys(result);
   const yAxisData = Object.values(result);
+  console.log(xAxisData);
+
+  const getOption = () =>({
+    xAxis: {
+      type: "category",
+      axisLabel: { interval: 0, rotate: 30 },
+      data: xAxisData,
+    },
+    yAxis: {
+      type: "value",
+    },
+    series: [
+      {
+        data: yAxisData,
+        type: "bar",
+        itemStyle: {
+          color: '#91cc75'
+      }
+      },
+    ],
+  })
 
   return (
     <div className="card">
       <div className="card-body">
         <h3>Visits on each Site</h3>
         <ReactEcharts
-          option={{
-            xAxis: {
-              type: "category",
-              data: xAxisData,
-            },
-            yAxis: {
-              type: "value",
-            },
-            series: [
-              {
-                data: yAxisData,
-                type: "bar",
-              },
-            ],
-          }}
+          option={getOption()}
         />
         <button className="btn btn-outline-success" type="button">
           {" "}
