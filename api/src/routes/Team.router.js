@@ -62,7 +62,7 @@ router.get("/:team_id", withUser, async function(req, res) {
   });
 
   const totalSites = await ActivityStream.count({
-    include: [User],
+    include: [{ model: User, where: { teamId } }],
     distinct: true,
     col: "name",
     raw: true,
