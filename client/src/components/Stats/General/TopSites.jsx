@@ -20,8 +20,8 @@ function TopSites() {
       <h3>Top Applications/Sites</h3>
       <div className="card">
         <ul className="list-group list-group-flush">
-					{allSites.map((site) =>(
-						<li className="list-group-item">{site.name}</li>
+					{allSites.map((site, index) =>(
+						<li className="list-group-item" key={index}>{site.name}</li>
 					))}
         </ul>
       </div>

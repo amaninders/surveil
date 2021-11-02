@@ -17,7 +17,22 @@ function TimeShare() {
     setAllSites(allSites.data);
   };
 
-  const dataNames = allSites.map((site) => site.name);
+  let  combinedSitesData = [];
+  if(allSites.length > 5) {
+    const topSites = allSites.slice(0, 4);
+    const restOfTheSites = allSites.slice(4);
+    const other = [{name:"Others", value: 0}];
+
+    for(const site of restOfTheSites) {
+      other[0].value += Number(site.value)
+    }
+    
+    combinedSitesData = topSites.concat(other);
+  } else {
+    combinedSitesData = [...allSites];
+  }
+
+  const dataNames = combinedSitesData.map((site) => site.name);
 
   const getOption = () => ({
     title: {
@@ -39,7 +54,7 @@ function TimeShare() {
         type: "pie",
         radius: "55%",
         center: ["50%", "60%"],
-        data: allSites,
+        data: combinedSitesData,
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
