@@ -6,7 +6,7 @@ function TeamUserList(props) {
 
 	const [users, setUsers] = useState([])
 	
-	//get top users
+	//get required data
 	const getData = async () => {
 
 		const requestOne = axios.get("http://localhost:8000/api/users", { withCredentials: true });
@@ -17,7 +17,7 @@ function TeamUserList(props) {
 			.then(axios.spread((...responses) => {
 				const users = responses[0].data
 				const activities = responses[1].data
-				const teams = responses[2].data
+				const team = responses[2].data.find(team => team.id === props.teamId)
 
 				const complianceData = {}
 				
@@ -36,13 +36,14 @@ function TeamUserList(props) {
 					count: complianceData[`${item.id}`] ? complianceData[`${item.id}`].count : 0,
 					compliant: complianceData[`${item.id}`] ? complianceData[`${item.id}`].compliant : 0,
 					score: complianceData[`${item.id}`] ? (complianceData[`${item.id}`].compliant / complianceData[`${item.id}`].count * 100) : 0,
-					team: teams.find(team => team.id === item.team_id)
+					team: team.name
 				}))
 
 				const output = sortedData.sort((a,b) => a.score - b.score).reverse();
 
-				console.log(output)
-				setUsers(output)
+				const filteredByTeam = output.filter(user => user.team_id === props.teamId)
+
+				setUsers(filteredByTeam)
 
 			}))
 			.catch(err => console.log(err))
@@ -54,7 +55,7 @@ function TeamUserList(props) {
 	}, []);
 
 
-	const componentData = users.map((item, index) => <UserCard key={index} name={item.first_name + ' ' + item.last_name} score={Math.round(item.score)} team={item.team.name}/>)
+	const componentData = users.map((item, index) => <UserCard key={index} name={item.first_name + ' ' + item.last_name} score={Math.round(item.score)} team={item.team}/>)
 
 
 	return (

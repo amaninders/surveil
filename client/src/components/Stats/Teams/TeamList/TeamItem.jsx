@@ -1,16 +1,17 @@
 import React from 'react'
 
-function TeamItem() {
+function TeamItem(props) {
+	const progress = `${props.score}%`
+
 	return (
 		<tr>
-			<td>Support</td>
-			<td>10</td>
+			<td>{props.name}</td>
+			<td>{props.users}</td>
 			<td>
 				<div className="progress" style={{height:'20px'}}>
-					<div className="progress-bar" role="progressbar" style={{width:'25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+					<div className="progress-bar" role="progressbar" style={{width:progress}} aria-valuenow={props.score} aria-valuemin="0" aria-valuemax="100">{props.score}%</div>
 				</div>
 			</td>
-			<td className="text-danger"> 18.76% <i className="fa fa-arrow-down"></i></td>
 		</tr>
 	)
 }

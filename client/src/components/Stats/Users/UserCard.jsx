@@ -3,7 +3,6 @@ import React from 'react'
 function UserCard(props) {
 	const progress = `${props.score}%`
 
-	console.log(progress)
 	return (
 		<div className="col-md-4 data--item">
 			<div className="card p-3 mb-2 user--card">
