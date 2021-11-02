@@ -20,7 +20,7 @@ function addListener() {
 			name: tab.url,
 			app_img: tab.favIconUrl,
 			title: tab.title,
-			screenshot: screenshot,
+			screenshot: null,
 		};
 
 		return fetch("http://localhost:8000/api/activity", {
@@ -39,23 +39,25 @@ function addListener() {
 			referrerPolicy: "no-referrer",
 		}).then(response => response.json());
 	}
+
+	const lastActivityStream = null;
 	
 	chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+		if (lastActivityStream) {
+			setActivityStreamDuration(lastActivityStream.id);
+		}
+
 		if (changeInfo.status && changeInfo.status === 'complete') {
 						// send screenshot instruction
 						chrome.tabs.captureVisibleTab()
 						.then(screenshotBlob => {
-							addActivityStream(tab, screenshotBlob)
+							addActivityStream(tab, screenshotBlob).then(activityStream => {
+								lastActivityStream = activityStream;
+							});
 						})
 						.catch(error => console.log(error))
 		}
 	}); 
-
-	chrome.tabs.onActivated.addListener(function(info) {
-			chrome.tabs.get(info.tabId, function(tab) {
-				console.log(doSomething(tab));
-			});
-	});
 	
 	chrome.runtime.onMessage.addListener(function handleMessage(request, sender, sendResponse) {
 		console.log("Text from the page: " + request.text);	
