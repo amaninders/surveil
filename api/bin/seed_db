@@ -51,37 +51,54 @@
     managerId: janeDoe.id,
   });
 
-  // Add "Developer" activity profile
-  // {
-  const activityProfile = await ActivityProfile.create({ name: "Developer" });
-  const activityProfileItemsData = [{
-    name: "Github",
-    expectedTime: 240,
-  }, {
-    name: "Facebook",
-    expectedTime: 240,
-  }, {
-    name: "StackOverflow",
-    expectedTime: 240,
-  }, {
-    name: "Draw.io",
-    expectedTime: 240,
-  }];
+  // Auto-generate activity profiles
+  const goodCommonSites = [
+    { title: "stackoverflow.com", name: "StackOverflow" },
+    { title: "stackexchange.com", name: "StackExchange" },
+    { title: "github.com", name: "Github" },
+    { title: "google.com", name: "Google" }
+  ];
+  const goodDataScienceSites = [
+    ...goodCommonSites,
+    { title: "www.tensorflow.org", name: "Tensorflow" },
+    { title: "www.reddit.com", name: "Reddit" },
+    { title: "ai.google", name: "Google AI" },
+    { title: "www.datarobot.com", name: "DataRobot | AI Cloud - The Next Generation of AI" },
+  ];
+  const goodFrontEndSites = [
+    ...goodCommonSites,
+    { title: "jsfiddle.org", name: "JSFiddle" },
+    { title: "draw.io", name: "Draw.io" },
+    { title: "lucidchart.com", name: "LucidChart" },
+    { title: "developer.mozilla.org", name: "MDN Web Docs" },
+    { title: "reactjs.org", name: "React - A JavaScript library for building user interfaces" },
+    { title: "css-tricks.com", name: "CSS-Tricks" },
+  ];
 
-  for (const { name, expectedTime } of activityProfileItemsData) {
-    await ActivityProfileItem.create({
-      name,
-      expectedTime,
-      activityProfileId: activityProfile.id,
-    });
+  const developerActivityProfile = await ActivityProfile.create({ name: "Developer" });
+  const dataScienceActivityProfile = await ActivityProfile.create({ name: "Data Scientist" });
+  const sitesActivityProfile = [
+    [ goodFrontEndSites, developerActivityProfile ],
+    [ goodDataScienceSites, dataScienceActivityProfile ],
+  ];
+
+  for (const [ sites, activityProfile ] of sitesActivityProfile) {
+    for (const { name } of sites) {
+      await ActivityProfileItem.create({
+        name,
+        expectedTime: 120,
+        activityProfileId: activityProfile.id,
+      });
+    }
   }
-  
+
   // Add employees to "Data Science"
   const makeAccountEmployeeData = (firstName, lastName) => ({
     firstName,
     lastName,
     teamId: dataScienceTeam.id,
     organizationId: amazon.id,
+    activityProfileId: dataScienceActivityProfile.id,
   });
 
   const dataScienceEmployees = await User.bulkCreate([
@@ -98,7 +115,7 @@
     lastName,
     teamId: frontEndTeam.id,
     organizationId: amazon.id,
-    activityProfileId: activityProfile.id,
+    activityProfileId: developerActivityProfile.id,
   });
 
   const frontEndEmployees = await User.bulkCreate([
@@ -109,24 +126,15 @@
     makeFrontEndEmployeeData("Matt", "Hamilton"),
   ]);
 
-  // Auto-generate activity profiles for users
-  const commonSites = [
-    { title: "stackoverflow.com", name: "StackOverflow" },
-    { title: "stackexchange.com", name: "StackExchange" },
-    { title: "github.com", name: "Github" },
-  ];
-  const dataScienceSites = [
-    ...commonSites,
-    { title: "www.tensorflow.org", name: "Tensorflow" },
-  ];
-  const frontEndSites = [
-    ...commonSites,
-    { title: "jsfiddle.org", name: "JSFiddle" },
-    { title: "draw.io", name: "Draw.io" },
-    { title: "lucidchart.com", name: "LucidChart" },
-    { title: "developer.mozilla.org", name: "MDN Web Docs" },
-    { title: "reactjs.org", name: "React - A JavaScript library for building user interfaces" },
-    { title: "css-tricks.com", name: "CSS-Tricks" },
+  const unproductiveSites = [
+    { title: "www.tumblr.com", name: "Tumblr" },
+    { title: "www.facebook.com", name: "Facebook" },
+    { title: "twitter.com", name: "Twitter. It's what's happening / Twitter" },
+    { title: "www.buzzfeed.com", name: "BuzzFeed" },
+    { title: "pinterest.com", name: "Pinterest" },
+    { title: "imgur.com", name: "Imgur: The magic of the internet" },
+    { title: "9gag.com", name: "9GAG: Go Fun The World" },
+    { title: "www.twitch.tv", name: "Twitch" },
   ];
 
   const randomRangeInt = (start, end) => {
@@ -135,6 +143,21 @@
 
   const randomElementUniform = arr => {
     return arr[randomRangeInt(0, arr.length - 1)];
+  };
+
+  const sitesWithUnproductiveMix = sites => {
+    const numUnproductiveSites = randomRangeInt(0, unproductiveSites.length - 1);
+    
+    const includedUnproductiveSites = [];
+
+    while (includedUnproductiveSites.length !== numUnproductiveSites) {
+      const idx = randomRangeInt(0, unproductiveSites.length - 1);
+      if (!includedUnproductiveSites.includes(idx)) {
+        includedUnproductiveSites.push(idx);
+      }
+    }
+
+    return [ ...sites, ...includedUnproductiveSites.map(idx => unproductiveSites[idx]) ];
   };
 
   const generateActivityStream = async function(user, sites) {
@@ -165,10 +188,10 @@
   };
 
   for (const employee of dataScienceEmployees) {
-    await generateActivityStream(employee, dataScienceSites);
+    await generateActivityStream(employee, sitesWithUnproductiveMix(goodDataScienceSites));
   }
 
   for (const employee of frontEndEmployees) {
-    await generateActivityStream(employee, frontEndSites);
+    await generateActivityStream(employee, sitesWithUnproductiveMix(goodFrontEndSites));
   }
 })();
