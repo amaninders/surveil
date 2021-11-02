@@ -52,7 +52,6 @@ function TeamBody() {
 					output[`${item.team.name}`].complianceScores.push(item.score)
 				}
 			}
-			console.log(output)				
 			setTeamData(output)
 		}))
 		.catch(err => console.log(err))		
@@ -65,7 +64,7 @@ function TeamBody() {
 	const componentData = []
 
 	for (const key in teamData) {
-		componentData.push(<TeamItem name={key} users={teamData[`${key}`].users} score={Math.round(teamData[`${key}`].complianceScores.reduce((a,b) => a + b, 0) / teamData[`${key}`].complianceScores.length) }/>)	
+		componentData.push(<TeamItem key={key} name={key} users={teamData[`${key}`].users} score={Math.round(teamData[`${key}`].complianceScores.reduce((a,b) => a + b, 0) / teamData[`${key}`].complianceScores.length) }/>)	
 	}
 
 	return (

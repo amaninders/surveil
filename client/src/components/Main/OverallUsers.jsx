@@ -39,7 +39,7 @@ function OverallUsers() {
 					team: teams.find(team => team.id === item.team_id)
 				}))
 
-				const output = sortedData.sort((a,b) => a.score - b.score).reverse().slice(0,3);
+				const output = sortedData.sort((a,b) => b.score - a.score).slice(0,3);
 
 				setUsers(output)
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import humanizeDuration from "humanize-duration";
 import axios from "axios";
 
 function TopSites() {
@@ -13,7 +14,7 @@ function TopSites() {
     const allSites = await axios.get("http://localhost:8000/api/allsites", {
       withCredentials: true,
     });
-    setAllSites(allSites.data.slice(0,6));
+    setAllSites(allSites.data.sort((a,b) => b.value - a.value).slice(0,5));
   };
   return (
     <div className="col-md-8 data--item">
@@ -21,7 +22,12 @@ function TopSites() {
       <div className="card">
         <ul className="list-group list-group-flush">
 					{allSites.map((site, index) =>(
-						<li className="list-group-item" key={index}>{site.name}</li>
+						<li className="list-group-item justify-content-center" key={index}>
+					    <div class="row">
+				        <div class="col-sm-6">{site.name}</div>
+				        <div class="col-sm-6 text-end">{ humanizeDuration(site.value * 1000) }</div>
+					    </div>
+						</li>
 					))}
         </ul>
       </div>

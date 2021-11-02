@@ -39,7 +39,7 @@ function TeamUserList(props) {
 					team: team.name
 				}))
 
-				const output = sortedData.sort((a,b) => a.score - b.score).reverse();
+				const output = sortedData.sort((a,b) => b.score - a.score);
 
 				const filteredByTeam = output.filter(user => user.team_id === props.teamId)
 
