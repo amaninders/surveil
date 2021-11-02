@@ -7,8 +7,8 @@ function Main() {
 	return (
 		<>
 			<OverallSites />
-			<OverallUsers />
 			<OverallTeams />
+			<OverallUsers />
 		</>
 	)
 }

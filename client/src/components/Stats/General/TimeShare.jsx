@@ -3,7 +3,8 @@ import axios from "axios";
 import ReactEcharts from "echarts-for-react";
 
 function TimeShare() {
-  const [allSites, setAllSites] = useState([]);
+
+	const [allSites, setAllSites] = useState([]);
 
   useEffect(() => {
     loadAllSites();
@@ -11,63 +12,63 @@ function TimeShare() {
 
   //get all sites visited by users and time spent
   const loadAllSites = async () => {
-    const allSites = await axios.get("http://localhost:8000/api/allsites", {
-      withCredentials: true,
-    });
+    const allSites = await axios.get("http://localhost:8000/api/allsites", {  withCredentials: true  });
     setAllSites(allSites.data);
   };
 
-  let  combinedSitesData = [];
-  if(allSites.length > 5) {
-    const topSites = allSites.slice(0, 4);
-    const restOfTheSites = allSites.slice(4);
-    const other = [{name:"Others", value: 0}];
+  const totalTime = allSites.map(site => site.value).reduce((prev, curr) => prev + curr, 0);
+	
+	console.log(totalTime);
 
-    for(const site of restOfTheSites) {
-      other[0].value += Number(site.value)
-    }
-    
-    combinedSitesData = topSites.concat(other);
-  } else {
-    combinedSitesData = [...allSites];
-  }
+	const source = allSites.map(site => {
+		return [
+			Math.round((site.value/totalTime) * 100),
+			site.value ? site.value : 0,
+			site.name
+		]
+	})
 
-  const dataNames = combinedSitesData.map((site) => site.name);
+	console.log(source)
 
+  // const dataNames = combinedSitesData.map((site) => site.name);
   const getOption = () => ({
-    title: {
-      text: "Time Share",
-      x: "center",
-    },
-    tooltip: {
-      trigger: "item",
-      formatter: "{a} <br/>{b}: ({d}%)",
-    },
-    legend: {
-      orient: "vertical",
-      left: "left",
-      data: dataNames,
-    },
-    series: [
-      {
-        name: "Time Share",
-        type: "pie",
-        radius: "55%",
-        center: ["50%", "60%"],
-        data: combinedSitesData,
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: "rgba(0, 0, 0, 0.5)",
-          },
-        },
-      },
-    ],
+    dataset: {
+			source: [
+				['score', 'time', 'product'],
+				...source
+			]
+		},
+		grid: { containLabel: false, left: '15%' },
+		xAxis: { name: 'time' },
+		yAxis: { type: 'category' },
+		visualMap: {
+			orient: 'horizontal',
+			left: 'center',
+			min: 0,
+			max: 50,
+			text: ['High Score', 'Low Score'],
+			// Map the score column to color
+			dimension: 0,
+			inRange: {
+				color: ['#65B581', '#FFCE34', '#FD665F']
+			}
+		},
+		series: [
+			{
+				type: 'bar',
+				barMinWidth:10,
+				encode: {
+					// Map the "amount" column to X axis.
+					x: 'time',
+					// Map the "product" column to Y axis
+					y: 'product'
+				}
+			}
+		]
   });
 
   return (
-    <div className="col-md-4 data--item">
+    <div className="col-md-12 data--item">
       <div className="card">
         <ReactEcharts option={getOption()} style={{ height: 300 }} />
       </div>

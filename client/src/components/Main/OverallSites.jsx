@@ -6,8 +6,9 @@ function OverallSites() {
 	return (
 		<div className="container">
 			<div className="row data--item">
-				<TopSites />
+			<h3>Top Sites</h3>
 				<TimeShare />
+				<TopSites />
 			</div>
 		</div>
 	)
