@@ -45,7 +45,7 @@ function TeamBody() {
 					if (!output[`${item.team.name}`]) {
 						output[`${item.team.name}`] = {
 							users: 1,
-							complianceScores: [item.score]
+							complianceScores: [item.score],
 						}
 					}
 					output[`${item.team.name}`].users += 1

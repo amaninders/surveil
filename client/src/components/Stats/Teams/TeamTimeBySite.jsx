@@ -40,7 +40,6 @@ function TeamTimeBySite(props) {
   const result = teamTimeBySite(teamMembers, activitiesByTime);
   const xAxisData = Object.keys(result);
   const yAxisData = Object.values(result);
-  console.log(xAxisData);
 
   const getOption = () =>({
     xAxis: {

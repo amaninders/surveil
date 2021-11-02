@@ -55,7 +55,7 @@ function Teams(props) {
         <div className="row data--item">
           <div className="col-xs-12">
             <h3>All Users</h3>
-            <TeamUserList teamId={Id.id}/>
+            <TeamUserList teamId={parseInt(Id.id)}/>
           </div>
         </div>
       </div>
