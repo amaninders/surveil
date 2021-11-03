@@ -43,6 +43,7 @@ function Teams(props) {
           />
         </div>
       </div>
+			<br /><br />
       <div className="container">
         <div className="row data--item">
           <TeamStats Id={Id} />
