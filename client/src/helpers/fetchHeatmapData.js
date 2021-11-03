@@ -20,8 +20,8 @@ export function fetchHeatmapData(activities, time) {
 
     for (let item of dataArray) {
       item.count === 0
-        ? (item.score = 0)
-        : (item.score = ((item.compliance / item.count) * 100).toFixed(2));
+        ? (item.score = null)
+        : (item.score = Math.round((item.compliance / item.count) * 100));
     }
 
     const time = dataArray.map((item) => item.time);
@@ -59,8 +59,8 @@ export function fetchHeatmapData(activities, time) {
     }
     for (let item of dataArray) {
       item.count === 0
-        ? (item.score = 0)
-        : (item.score = ((item.compliance / item.count) * 100).toFixed(2));
+        ? (item.score = null)
+        : (item.score = Math.round((item.compliance / item.count) * 100));
     }
 
     const day = [
@@ -108,8 +108,8 @@ export function fetchHeatmapData(activities, time) {
 
     for (let item of dataArray) {
       item.count === 0
-        ? (item.score = 0)
-        : (item.score = ((item.compliance / item.count) * 100).toFixed(2));
+        ? (item.score = null)
+        : (item.score = Math.round((item.compliance / item.count) * 100));
     }
 
     const time = dataArray.map((item) => item.time + 1);
@@ -147,8 +147,8 @@ export function fetchHeatmapData(activities, time) {
 
     for (let item of dataArray) {
       item.count === 0
-        ? (item.score = 0)
-        : (item.score = ((item.compliance / item.count) * 100).toFixed(2));
+        ? (item.score = null)
+        : (item.score = Math.round((item.compliance / item.count) * 100));
     }
 
     const day = [
