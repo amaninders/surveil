@@ -1,5 +1,4 @@
 import React from 'react'
-import Navigator from '../Navigator'
 import OrgProfile from './OrgProfile/Index'
 import OrgTeams from './OrgTeams/Index'
 import OrgUsers from './OrgUsers/Index'
@@ -15,8 +14,7 @@ function Admin() {
 							</div>
 			        <div className="col-sm-9">
 								<OrgTeams />
-							</div>
-			        <div className="col-sm-12">
+								<br />
 								<OrgUsers />
 							</div>
 			    </div>

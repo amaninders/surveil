@@ -1,0 +1,80 @@
+@import url("https://cdn.linearicons.com/free/1.0.0/icon-font.min.css");
+
+.org-list-title {
+	margin-top: 0.5rem !important;
+}
+
+.org-profile-card {
+  background: #fff;
+  box-shadow: 0 1px 38px rgba(0, 0, 0, 0.15), 0 5px 12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+.org-profile-card .top {
+  position: relative;
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  background-color: green;
+  background-size: cover;
+  background-position: center center;
+  text-align: center;
+}
+.org-profile-card .top .wrapper {
+  padding: 30px;
+  position: relative;
+  z-index: 1;
+}
+.org-profile-card .top .wrapper .mynav {
+  height: 20px;
+}
+.org-profile-card .top .wrapper .mynav .lnr {
+  color: #fff;
+  font-size: 20px;
+}
+
+.org-profile-card .top .wrapper .mynav .lnr-cog {
+  display: inline-block;
+  float: right;
+}
+.org-profile-card .top .wrapper .heading {
+  margin-top: 20px;
+  font-size: 35px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.org-profile-card .top:after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.org-profile-card .bottom {
+  padding: 0 30px;
+  background: #fff;
+}
+.org-profile-card .bottom .wrapper .org-numbers {
+  overflow: hidden;
+  margin: 0;
+  font-size: 0;
+  padding: 0;
+  padding-top: 20px;
+  max-height: 155px;
+}
+
+.org-profile-card .bottom .wrapper .org-numbers li {
+  display: block;
+  font-size: 25px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.25);
+  line-height: 1em;
+  margin-bottom: 30px;
+}
+
+.org-profile-card .bottom .wrapper .org-numbers li.active {
+  color: rgba(0, 0, 0, 0.8);
+}

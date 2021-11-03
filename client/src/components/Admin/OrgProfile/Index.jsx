@@ -7,17 +7,15 @@ function OrgProfile() {
 			<div className="top">
 				<div className="wrapper">
 					<div className="mynav">
-						<a href="/"><span className="lnr lnr-chevron-left"></span></a>
 						<a href="/"><span className="lnr lnr-cog"></span></a>
 					</div>
-					<h1 className="heading">Org Name</h1>
+					<h1 className="heading">Skynet</h1>
 				</div>
 			</div>
 			<div className="bottom">
 				<div className="wrapper">
-					<ul className="forecast">
-						<a href="/"><span className="lnr lnr-chevron-up go-up "></span></a>
-						<li className="d-flex active justify-content-between">
+					<ul className="org-numbers">
+						<li className="d-flex active justify-content-between align-middle">
 							<span>Teams</span>
 							<span>2</span>
 						</li>

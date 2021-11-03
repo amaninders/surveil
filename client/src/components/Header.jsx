@@ -28,16 +28,25 @@ function Header(props) {
           <span className="navbar-toggler-icon"><i class="fas fa-bars align-middle"></i></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+						
+					</ul>
           {!props.token && (
             <button className="btn btn-light" style={{ marginRight: "10px" }}>
               Register
             </button>
           )}
           {props.token && (
-            <button className="btn btn-light" style={{ marginRight: "10px" }}>
-              Logout
-            </button>
+						<>
+							<a href="/admin">
+								<button className="btn btn-outline-light" style={{ marginRight: "10px" }}>
+									Admin
+								</button>
+							</a>
+	            <button className="btn btn-light" style={{ marginRight: "10px" }}>
+	              Logout
+	            </button>
+						</>
           )}
         </div>
       </div>

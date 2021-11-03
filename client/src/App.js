@@ -24,7 +24,7 @@ import Users     from "./components/Users/Index";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState } from "react";
 import useToken from './hooks/useToken';
-import Admin from "./components/admin/Index";
+import Admin from "./components/Admin/Index";
 
 
 // The main App function
