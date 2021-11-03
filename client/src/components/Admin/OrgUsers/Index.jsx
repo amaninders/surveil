@@ -9,17 +9,17 @@ function OrgUsers(props) {
 				<button className="btn btn-secondary btn-sm">Add User</button>
 		  </div>
 		  <ul class="list-group list-group-numbered">
-			{props.users.map(user => {
-				const team = props.teams.find(item => item.id === user.team_id)
-					return(
-						<li class="list-group-item d-flex justify-content-between align-items-start">
-				    <div class="ms-2 me-auto">
-				      <div class="fw-bold">{`${user.first_name} ${user.last_name}`}</div>
-				    </div>
-				    <span class="btn btn-outline-success btn-sm rounded-pill disabled">{team ? team.name : 'Admin/Manager'}</span>
-				  	</li>
-					)
-			})}
+				{props.users.map(user => {
+					const team = props.teams.find(item => item.id === user.team_id)
+						return(
+							<li class="list-group-item d-flex justify-content-between align-items-start">
+						    <div class="ms-2 me-auto">
+						      <div class="fw-bold">{`${user.first_name} ${user.last_name}`}</div>
+						    </div>
+						    <span class="btn btn-outline-success btn-sm rounded-pill disabled">{team ? team.name : 'Admin/Manager'}</span>
+					  	</li>
+						)
+				})}
 			</ul>
 		</div>
 	)
