@@ -53,7 +53,7 @@ function SendEmail(props) {
 	return (
 		<>
 			<form onSubmit={onSubmit}>
-				<button className="btn btn-secondary" type="submit">
+				<button className="btn btn-secondary" type="submit" style={{minWidth:"100%"}}>
 					Email Compliance Report
 				</button>
 				<ToastContainer
