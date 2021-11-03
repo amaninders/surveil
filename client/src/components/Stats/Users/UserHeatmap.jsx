@@ -76,7 +76,7 @@ function UserHeatmap(props) {
     },
     series: [
       {
-        name: "Punch Card",
+        name: "Compliance Score",
         type: "heatmap",
         data: scores,
         label: {

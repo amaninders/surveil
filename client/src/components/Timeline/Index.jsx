@@ -53,6 +53,8 @@ function Timeline(props) {
                 appImage="favicon.ico"
                 name={activity.name}
                 title={activity.title}
+								start={activity.start_time}
+								end={activity.end_time}
               />
             ))}
           </ul>
