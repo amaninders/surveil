@@ -71,7 +71,7 @@ function UserHeatmap(props) {
       left: "92%",
       top: "center",
 			inRange: {
-				color: ['lightcoral', '#fff', '#95d18a', '#60b051','#47a137', '#247816', '#0d5701']
+				color: ['sandybrown', '#fff', '#95d18a', '#60b051','#47a137', '#247816', '#0d5701']
 		}
     },
     series: [

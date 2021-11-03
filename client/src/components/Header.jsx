@@ -8,6 +8,12 @@
 import React from "react";
 
 function Header(props) {
+
+	function logout() {
+		localStorage.removeItem('token');
+		window.location.replace('/');
+	}	
+
   return (
     <nav className="navbar navbar-expand-lg navbar--custom">
       <div className="container-fluid">
@@ -43,7 +49,7 @@ function Header(props) {
 									Admin
 								</button>
 							</a>
-	            <button className="btn btn-light" style={{ marginRight: "10px" }}>
+	            <button className="btn btn-light" style={{ marginRight: "10px" }} onClick={() => logout()}>
 	              Logout
 	            </button>
 						</>
