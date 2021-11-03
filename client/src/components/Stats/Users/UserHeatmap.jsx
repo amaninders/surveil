@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import * as echarts from 'echarts';
 import ReactEcharts from 'echarts-for-react';
 
@@ -50,12 +50,13 @@ const graphData = {
   }
 };
 
-function UserHeatmap() {
+function UserHeatmap(props) {
+
 	return (
 		<div className="card">
 		<div className="card-body">
 			<ReactEcharts option={graphData} />
-			<button className="btn btn-outline-success" type="button"> <i className="fas fa-redo"></i> </button>	
+			<button className="btn btn-outline-success" type="button" onClick={() => window.location.reload(false)}> <i className="fas fa-redo"></i> </button>	
 		</div>
 	</div>
 	)

@@ -68,7 +68,7 @@ function TeamTimeBySite(props) {
         <ReactEcharts
           option={getOption()}
         />
-        <button className="btn btn-outline-success" type="button">
+        <button className="btn btn-outline-success" type="button" onClick={() => window.location.reload(false)}>
           {" "}
           <i className="fas fa-redo"></i>{" "}
         </button>
