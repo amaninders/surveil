@@ -40,7 +40,7 @@ function TimeShare() {
 		yAxis: { name: 'websites visited', type: 'category' },
 		series: [
 			{
-				color: 'green',
+				color: 'sandybrown',
 				type: 'bar',
 				barMinWidth:5,
 				encode: {
@@ -54,7 +54,7 @@ function TimeShare() {
   });
 
   return (
-    <div className="col-md-12 data--item">
+    <div className="col-md-12">
       <div className="card">
         <ReactEcharts option={getOption()} style={{ height: 450 }} />
       </div>

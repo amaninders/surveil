@@ -16,10 +16,9 @@ function SendEmail(props) {
 		.then((response) => {
 			toast.success('Compliance Report Sent!', {
 				position: "top-center",
-				autoClose: 5000,
+				autoClose: 2000,
 				hideProgressBar: false,
 				closeOnClick: true,
-				pauseOnHover: true,
 				draggable: true,
 				progress: undefined,
 				});
@@ -59,14 +58,12 @@ function SendEmail(props) {
 				</button>
 				<ToastContainer
 					position="top-center"
-					autoClose={5000}
+					autoClose={2000}
 					hideProgressBar={false}
 					newestOnTop={false}
 					closeOnClick
 					rtl={false}
-					pauseOnFocusLoss
 					draggable
-					pauseOnHover
 					/>
 			</form>
 		</>
