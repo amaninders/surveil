@@ -45,11 +45,11 @@ function Admin() {
             <OrgProfile users={users} teams={teams}/>
           </div>
           <div className="col-sm-9">
-            <OrgTeams teams={teams}/>
+            <OrgTeams teams={teams} users={users}/>
             <br />
-            <OrgUsers users={users}/>
+            <OrgUsers users={users} teams={teams}/>
 						<br />
-            <OrgActivityProfiles activityProfiles={activityProfiles}/>
+            <OrgActivityProfiles activityProfiles={activityProfiles} users={users}/>
           </div>
         </div>
       </div>
