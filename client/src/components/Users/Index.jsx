@@ -46,7 +46,7 @@ function Users(props) {
         <div className="row data--item">
           <h3>Compliance Heatmap</h3>
           <div className="col-sm-12">
-            <UserHeatmap />
+            <UserHeatmap Id={Id} toggle={toggle}/>
           </div>
         </div>
         <div className="row data--item">

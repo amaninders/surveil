@@ -1,64 +1,103 @@
-import React from 'react'
-import * as echarts from 'echarts';
-import ReactEcharts from 'echarts-for-react';
+import React, { useEffect, useState } from "react";
+import ReactEcharts from "echarts-for-react";
+import axios from "axios";
+import { displayActivitiesByTime } from "../../../helpers/fetchActivitiesByTime";
+import { fetchHeatmapData } from "../../../helpers/fetchHeatmapData";
 
-function getData(year) {
-  year = year || '2017';
-  let date = +echarts.number.parseDate(year + '-01-01');
-  let end = +echarts.number.parseDate(+year + 1 + '-01-01');
-  let dayTime = 3600 * 24 * 1000;
-  let data = [];
-  for (var time = date; time < end; time += dayTime) {
-    data.push([
-      echarts.format.formatTime('yyyy-MM-dd', time),
-      Math.floor(Math.random() * 10000)
-    ]);
+function UserHeatmap(props) {
+  const [activities, setActivities] = useState([]);
+
+  useEffect(() => {
+    loadActivities();
+  }, [props.Id, props.toggle]);
+
+  //get all Activities for a user
+  let allActivities = [];
+  const loadActivities = async () => {
+    allActivities = await axios.get(
+      `http://localhost:8000/api/users/${props.Id.id}/activity`,
+      {
+        withCredentials: true,
+      }
+    );
+    setActivities(allActivities.data.reverse());
+  };
+
+  const activitiesByTime = displayActivitiesByTime(
+    activities,
+    props.toggle.btnradio
+  );
+
+  //add week date and today time in activities array
+  for (const activity of activitiesByTime) {
+    const time = new Date(activity.start_time);
+    activity.week = time.toISOString().slice(0, 10);
+    activity.today = time.getHours() + ":" + time.getMinutes();
   }
-  return data;
-}
+
+  const { time, scores, day } = fetchHeatmapData(activities, props.toggle.btnradio);
+  console.log(time, day, scores);
 
 
-// in production fetch this data from server
-const graphData = {
-  tooltip: {},
-  visualMap: {
-    min: 0,
-    max: 10000,
-    type: 'piecewise',
-    orient: 'horizontal',
-    left: 'center',
-    top: 65,
-		inRange : {   
-			color: ['#fff', '#95d18a' ] //From smaller to bigger value ->
-		}
-  },
-  calendar: {
-    top: 120,
-    left: 30,
-    right: 30,
-    cellSize: ['auto', 20],
-    range: '2016',
-    itemStyle: {
-      borderWidth: 0.5
+  const getOption = () => ({
+    tooltip: {
+      position: "top",
     },
-    yearLabel: { show: false }
-  },
-  series: {
-    type: 'heatmap',
-    coordinateSystem: 'calendar',
-    data: getData('2016')
-  }
-};
+    grid: {
+      height: "50%",
+      top: "10%",
+    },
+    xAxis: {
+      type: "category",
+      data: time,
+      splitArea: {
+        show: true,
+      },
+    },
+    yAxis: {
+      type: "category",
+      data: day,
+      splitArea: {
+        show: true,
+      },
+    },
+    visualMap: {
+      min: 0,
+      max: 100,
+      calculable: true,
+      orient: "horizontal",
+      left: "center",
+      bottom: "15%",
+    },
+    series: [
+      {
+        name: "Punch Card",
+        type: "heatmap",
+        data: scores,
+        label: {
+          show: true,
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowColor: "rgba(0, 0, 0, 0.5)",
+          },
+        },
+      },
+    ],
+  });
 
-function UserHeatmap() {
-	return (
-		<div className="card">
-		<div className="card-body">
-			<ReactEcharts option={graphData} />
-			<button className="btn btn-outline-success" type="button"> <i className="fas fa-redo"></i> </button>	
-		</div>
-	</div>
-	)
+  return (
+    <div className="card">
+      <div className="card-body">
+        <ReactEcharts option={getOption()} />
+        <button className="btn btn-outline-success" type="button">
+          {" "}
+          <i className="fas fa-redo"></i>{" "}
+        </button>
+      </div>
+    </div>
+  );
 }
 
-export default UserHeatmap
+export default UserHeatmap;
