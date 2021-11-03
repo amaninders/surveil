@@ -43,11 +43,12 @@ function Teams(props) {
           />
         </div>
       </div>
-      <div className="container">
+			<br /><br />
+      <div className="container" id="teams">
         <div className="row data--item">
           <TeamStats Id={Id} />
         </div>
-        <div className="row data--item">
+        <div className="row data--item" id="team-graph">
           <div className="col-xs-12">
             <TeamTimeBySite Id={Id} toggle={toggle} />
           </div>

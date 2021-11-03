@@ -6,8 +6,6 @@
 */
 
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 
 function Header(props) {
   return (
@@ -15,7 +13,7 @@ function Header(props) {
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
           <h3 style={{ color: "black", paddingTop: "5px" }}>
-            <FontAwesomeIcon icon={faUserSecret} /> Surveil
+            <img src="images/logo/default-monochrome.svg" alt="" width="140px"/>
           </h3>
         </a>
         <button
@@ -27,7 +25,7 @@ function Header(props) {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"><i class="fas fa-bars align-middle"></i></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>

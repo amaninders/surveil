@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ReactEcharts from "echarts-for-react";
+import convert from  'convert-seconds';
 
 function TimeShare() {
 
@@ -17,18 +18,14 @@ function TimeShare() {
   };
 
   const totalTime = allSites.map(site => site.value).reduce((prev, curr) => prev + curr, 0);
-	
-	console.log(totalTime);
 
 	const source = allSites.map(site => {
 		return [
 			Math.round((site.value/totalTime) * 100),
-			site.value ? site.value : 0,
-			site.name
+			site.value ? convert(site.value).hours : 0,
+			(site.name.substr(0, 20) + "\u2026")
 		]
 	})
-
-	console.log(source)
 
   // const dataNames = combinedSitesData.map((site) => site.name);
   const getOption = () => ({
@@ -39,24 +36,13 @@ function TimeShare() {
 			]
 		},
 		grid: { containLabel: false, left: '15%' },
-		xAxis: { name: 'time' },
-		yAxis: { type: 'category' },
-		visualMap: {
-			orient: 'horizontal',
-			left: 'center',
-			min: 0,
-			max: 50,
-			text: ['High Score', 'Low Score'],
-			// Map the score column to color
-			dimension: 0,
-			inRange: {
-				color: ['#65B581', '#FFCE34', '#FD665F']
-			}
-		},
+		xAxis: { name: 'time spent in hours' },
+		yAxis: { name: 'websites visited', type: 'category' },
 		series: [
 			{
+				color: 'sandybrown',
 				type: 'bar',
-				barMinWidth:10,
+				barMinWidth:5,
 				encode: {
 					// Map the "amount" column to X axis.
 					x: 'time',
@@ -68,9 +54,9 @@ function TimeShare() {
   });
 
   return (
-    <div className="col-md-12 data--item">
+    <div className="col-md-12">
       <div className="card">
-        <ReactEcharts option={getOption()} style={{ height: 300 }} />
+        <ReactEcharts option={getOption()} style={{ height: 450 }} />
       </div>
     </div>
   );

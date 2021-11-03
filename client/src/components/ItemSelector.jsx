@@ -1,4 +1,5 @@
 import React from "react";
+import SendEmail from "./SendEmail";
 
 function ItemSelector(props) {
   const onToggleChange = (e) => {
@@ -13,9 +14,6 @@ function ItemSelector(props) {
     <div className="row row-cols-lg-auto g-3 align-items-center justify-content-between">
       <div className="col-12">
         <form>
-          <label className="form-label">
-            {`Select a ${props.view === "users" ? "user" : "team"}`}{" "}
-          </label>
           <select
             className="form-select"
             name="id"
@@ -34,6 +32,7 @@ function ItemSelector(props) {
           </select>
         </form>
       </div>
+			<SendEmail view={props.view} id={props.Id}/>
       <div className="col-12">
         <form>
           <div

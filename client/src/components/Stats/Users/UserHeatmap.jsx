@@ -35,9 +35,11 @@ function UserHeatmap(props) {
     activity.today = time.getHours() + ":" + time.getMinutes();
   }
 
-  const { time, scores, day } = fetchHeatmapData(activities, props.toggle.btnradio);
+  const { time, scores, day } = fetchHeatmapData(
+    activities,
+    props.toggle.btnradio
+  );
   console.log(time, day, scores);
-
 
   const getOption = () => ({
     tooltip: {
