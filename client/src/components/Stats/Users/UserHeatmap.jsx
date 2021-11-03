@@ -46,8 +46,8 @@ function UserHeatmap(props) {
       position: "top",
     },
     grid: {
-      height: "90%",
-      top: "10%",
+      height: "70%",
+      top: "center",
     },
     xAxis: {
       type: "category",
@@ -69,7 +69,7 @@ function UserHeatmap(props) {
       calculable: true,
       orient: "vertical",
       left: "92%",
-      bottom: "18%",
+      top: "center",
 			inRange: {
 				color: ['lightcoral', '#fff', '#95d18a', '#60b051','#47a137', '#247816', '#0d5701']
 		}
@@ -96,7 +96,7 @@ function UserHeatmap(props) {
   return (
     <div className="card">
       <div className="card-body">
-        <ReactEcharts option={getOption()} />
+        <ReactEcharts option={getOption()} style={{ height: 400 }} />
         <button className="btn btn-outline-success" type="button" onClick={() => window.location.reload(false)}>
           {" "}
           <i className="fas fa-redo"></i>{" "}

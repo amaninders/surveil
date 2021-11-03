@@ -24,6 +24,7 @@ import Users     from "./components/Users/Index";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState } from "react";
 import useToken from './hooks/useToken';
+import Admin from "./components/admin/Index";
 
 
 // The main App function
@@ -64,6 +65,9 @@ function App() {
             </Route>
             <Route path="/main">
               <Main />
+            </Route>
+            <Route path="/admin">
+              <Admin />
             </Route>
             <Route path="/">
               <Main />
