@@ -3,13 +3,12 @@ import { send } from 'emailjs-com';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 function SendEmail(props) {
 
 	const toSend = {
-    from_name: 'Surveil',
+		from_name: 'Surveil',
     to_name: props.view,
-    message: `${props.view} compliance report`,
+    message: props.view ==='teams' ? `teams` : `users`,
     reply_to: 'compliance@surveil.com',
   };
 
@@ -21,7 +20,7 @@ function SendEmail(props) {
       toSend,
       'user_BKs8vkmJxKjXSiI2xTqya'
     )
-      .then((response) => {
+		.then((response) => {
 				toast.success('Compliance Report Sent!', {
 					position: "top-center",
 					autoClose: 5000,
@@ -34,7 +33,7 @@ function SendEmail(props) {
         console.log('SUCCESS!', response.status, response.text);
       })
       .catch((err) => {
-				toast("Failed❗");
+				toast("Failed");
         console.log('FAILED...', err);
       });
   };

@@ -3,7 +3,6 @@ import ItemSelector from "../ItemSelector";
 import UserHeatmap from "../Stats/Users/UserHeatmap";
 import Timeline from "../Timeline/Index";
 import axios from "axios";
-import SendEmail from "../SendEmail";
 
 function Users(props) {
   props.setView("users");

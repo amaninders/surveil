@@ -17,8 +17,6 @@ function TimeShare() {
   };
 
   const totalTime = allSites.map(site => site.value).reduce((prev, curr) => prev + curr, 0);
-	
-	console.log(totalTime);
 
 	const source = allSites.map(site => {
 		return [
@@ -27,8 +25,6 @@ function TimeShare() {
 			site.name
 		]
 	})
-
-	console.log(source)
 
   // const dataNames = combinedSitesData.map((site) => site.name);
   const getOption = () => ({

@@ -10,8 +10,6 @@ function ItemSelector(props) {
     props.setId({ [e.target.name]: e.target.value });
   };
 
-	// props.view
-
   return (
     <div className="row row-cols-lg-auto g-3 align-items-center justify-content-between">
       <div className="col-12">
@@ -34,7 +32,7 @@ function ItemSelector(props) {
           </select>
         </form>
       </div>
-			<SendEmail view={props.view}/>
+			<SendEmail view={props.view} id={props.Id}/>
       <div className="col-12">
         <form>
           <div
