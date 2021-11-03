@@ -55,7 +55,7 @@ function SendEmail(props) {
 		<>
 			<form onSubmit={onSubmit}>
 				<button className="btn btn-secondary" type="submit">
-					Generate Compliance Report
+					Email Compliance Report
 				</button>
 				<ToastContainer
 					position="top-center"

@@ -16,18 +16,21 @@ function TopSites() {
     });
     setAllSites(allSites.data.sort((a,b) => b.value - a.value).slice(0,6));
   };
+
   return (
     <div className="col-md-12 data--item">
       <div className="card">
         <ul className="list-group list-group-flush">
-					{allSites.map((site, index) =>(
-						<li className="list-group-item justify-content-center" key={index}>
-					    <div className="row">
-				        <div className="col-sm-6">{site.name}</div>
-				        <div className="col-sm-6 text-end">{ humanizeDuration(site.value * 1000) }</div>
-					    </div>
-						</li>
-					))}
+					{allSites.map((site, index) => {
+						return (
+							<li className="list-group-item justify-content-center" key={index}>
+								<div className="row">
+									<div className="col-sm-6">{site.name}</div>
+									<div className="col-sm-6 text-end">{ humanizeDuration(site.value * 1000) }</div>
+								</div>
+							</li>
+						)
+					})}
         </ul>
       </div>
     </div>
