@@ -46,7 +46,7 @@ function UserHeatmap(props) {
       position: "top",
     },
     grid: {
-      height: "50%",
+      height: "90%",
       top: "10%",
     },
     xAxis: {
@@ -67,9 +67,12 @@ function UserHeatmap(props) {
       min: 0,
       max: 100,
       calculable: true,
-      orient: "horizontal",
-      left: "center",
-      bottom: "15%",
+      orient: "vertical",
+      left: "92%",
+      bottom: "18%",
+			inRange: {
+				color: ['lightcoral', '#fff', '#95d18a', '#60b051','#47a137', '#247816', '#0d5701']
+		}
     },
     series: [
       {
@@ -79,6 +82,7 @@ function UserHeatmap(props) {
         label: {
           show: true,
         },
+				cellSize: ['auto', 25],
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
@@ -93,7 +97,7 @@ function UserHeatmap(props) {
     <div className="card">
       <div className="card-body">
         <ReactEcharts option={getOption()} />
-        <button className="btn btn-outline-success" type="button">
+        <button className="btn btn-outline-success" type="button" onClick={() => window.location.reload(false)}>
           {" "}
           <i className="fas fa-redo"></i>{" "}
         </button>

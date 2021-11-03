@@ -1,8 +1,8 @@
 {
-  "name": "Surveil",
-  "description": "Collects data for teams on Surveil",
-  "version": "1.0",
   "manifest_version": 3,
+  "name": "Surveil",
+  "version": "1.0",
+  "description": "Collects data for teams on Surveil",
 	"action": {
     "default_icon": {              
       "16": "images/logo.ico",
