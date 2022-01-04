@@ -57,7 +57,7 @@ const onListening = () => {
  * Get port from environment and store in Express.
  */
 
-const port = Number(process.env.PORT || "3000");
+const port = Number(process.env.PORT || "8000");
 app.set("port", port);
 
 /**
