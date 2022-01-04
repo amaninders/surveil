@@ -24,6 +24,7 @@ app.use(
       `http://localhost:${process.env.PORT}`,
       `http://localhost:3000`,
       `http://localhost:3002`,
+      `https://surveil.herokuapp.com/`
     ],
     credentials: true,
   })
