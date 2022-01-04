@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+This folder contains all the files for the front end (CRA)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To run the project on heroku, use the following instructions:
 
-## Available Scripts
+In the Heroku dashboard:
+Step 1) - Connect github repository to Heroku
+Inside the Deploy tab, scroll to Deployment method and connect your Github account. find the repo and hit connect. heroku should be authorized as an Oauth app in your github now.
 
-In the project directory, you can run:
+If you cannot find the repo: Either your github has not authorized Heroku or you did not create this repo and need to make sure you have admin access to it. If this is not possible, invite an admin of the repo to your heroku app by going to Access tab in Heroku Dashboard and adding the admin as a collaborator. The admin then logs into heroku and completes Step 1 here. Afterwards you can finish the following steps.
 
-### `npm start`
+Step 2) - Set Heroku Config Var PROJECT_PATH to your server folder
+Inside the Settings tab, set a config var to tell Heroku the path to find the server code you want deployed.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Example: lets say your repo name is MyRepo and it has 2 sub-folders. back-end contains a Node.js server and front-end contains a React app. Your github directory looks like this:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+MyRepo/front-end/package.json
+MyRepo/back-end/package.json
 
-### `npm test`
+Then you should set your config var to PROJECT_PATH in the left box and back-end in the right box.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Step 3) - Set a Heroku Buildpack that will deploy the PROJECT_PATH folder
+Again inside the Settings tab, you need to add a Buildpack that will tell heroku to look for your folder instead of deploying the repo root. There should already be 1 buildpack there to tell heroku what type of server it is (javascript/node.js, python/django, etc...).
 
-### `npm run build`
+Enter this url to add buildpack https://github.com/timanovsky/subdir-heroku-buildpack.git and make sure this is at the top of the buildpack chain (drag the lines on the left to make it above any other buildpacks you have added.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Step 4) - Enable auto deploy
+Inside the Deploy tab, scroll to Automatic Deploys and click the black button to enable automatic deploys
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Auto Deploy complete! Now check the build logs and make sure you don't have any errors
