@@ -1,3 +1,12 @@
+/**
+ * Module dependencies.
+ */
+
+require("dotenv").config();
+require("express-async-errors");
+ 
+const debug = require("debug")("api:server");
+const http = require("http");
 const createError = require("http-errors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
@@ -59,4 +68,72 @@ app.use(function(_, __, next) {
 app.use(exceptionHandler);
 app.use(errorHandler);
 
-module.exports = app;
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+ const onError = error => {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+
+  const bind = typeof port === "string"
+    ? "Pipe " + port
+    : "Port " + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+  case "EACCES":
+    console.error(bind + " requires elevated privileges");
+    process.exit(1);
+    break;
+  case "EADDRINUSE":
+    console.error(bind + " is already in use");
+    process.exit(1);
+    break;
+  default:
+    throw error;
+  }
+};
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+const onListening = () => {
+  const addr = server.address();
+  const bind = typeof addr === "string"
+    ? "pipe " + addr
+    : "port " + addr.port;
+  debug("Listening on " + bind);
+};
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+const port = Number(process.env.PORT || "6000");
+app.set("port", port);
+
+/**
+ * Create HTTP server.
+ */
+
+const server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.on("error", onError);
+server.on("listening", onListening);
+
+(async function() {
+  // Load models and create any tables that don't already exist
+  const { sequelize } = require("../src/models");
+  await sequelize.sync();
+
+  // Listen on port
+  server.listen(port);
+})();
