@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-require("dotenv").config();
+// require("dotenv").config();
 require("express-async-errors");
  
 const debug = require("debug")("api:server");
